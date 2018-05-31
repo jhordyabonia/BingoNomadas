@@ -115,7 +115,7 @@ public class List extends FragmentActivity implements View.OnClickListener,
                             store_raw.getJSONObject(u).getString(Server.BINGO));
                     int n=obj.getJSONArray(Game.TABLES).length();
                     Adapter.Item tt = new Adapter.Item(obj.getString(Store.BINGO_NAME)
-                            , obj.getString(Store.AUTHOR_CELLULAR), "Tablas registradas: "+n);
+                            , obj.getString(Store.AUTHOR_CELLULAR), "Tablas registradas: "+n,"4.jpg");
 
                     base.add(tt);
                 }

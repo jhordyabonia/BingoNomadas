@@ -78,7 +78,7 @@ public class DownLoadImage  extends AsyncTask<String, Void, Bitmap>
 	        }
 	        if(!local)
 	        {
-				URL imageUrl = new URL(Server.URL_SERVER+"foto/"+fotos[0]);
+				URL imageUrl = new URL(Server.URL_SERVER.replace("bn/","uploads/bn/")+fotos[0]);
 				HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
 				conn.connect();
 				BufferedInputStream in = new BufferedInputStream(conn.getInputStream());
@@ -95,11 +95,8 @@ public class DownLoadImage  extends AsyncTask<String, Void, Bitmap>
         {
         	if(callback!=null)
             	callback.addItem(bitmap);
-            Toast.makeText(activity,"finish procees to load image", Toast.LENGTH_SHORT).show();
             return;
         }
-
-		Toast.makeText(activity,"Fail to load image", Toast.LENGTH_SHORT).show();
     }
 }
 

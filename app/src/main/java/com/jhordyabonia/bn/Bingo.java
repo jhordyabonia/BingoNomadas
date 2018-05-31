@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Bingo extends FragmentActivity {
-	public static boolean fullScream = false,zoom=false;
+	public static boolean zoom=false;
 	private Gallery collection;
 	private ViewPager galery;
 	private AdView mAdView;
@@ -59,7 +59,7 @@ public class Bingo extends FragmentActivity {
 
 		Intent intent =getIntent();
 		if(intent==null)
-		{	finish();return;}
+		{	finish();   return; }
 
 		try
 		{
@@ -73,7 +73,6 @@ public class Bingo extends FragmentActivity {
 				if(!image.isEmpty())
 					collection.loadItem(image);
 		}catch(JSONException e){}
-
 
 		mAdView = (AdView)findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
@@ -89,13 +88,11 @@ public class Bingo extends FragmentActivity {
 	{
 		private ArrayList<Bitmap> data = new ArrayList<Bitmap>();
 
-		public Gallery(FragmentManager fm){	super(fm);}
+		public Gallery(FragmentManager fm){	super(fm);loadItem("4.jpg");}
 		public void addItem(Bitmap img)
 		{
-			data.add(img);
+            data.add(img);
 			notifyDataSetChanged();
-			Toast.makeText(Bingo.this, "Apunte "+(data.size()-1)
-					+" agregado!",Toast.LENGTH_SHORT).show();
 			galery.setCurrentItem(data.size()-1);
 		}
 		public void loadItem(String img)
@@ -103,13 +100,11 @@ public class Bingo extends FragmentActivity {
 			DownLoadImage loader = new DownLoadImage(Bingo.this);
 			loader.setCallBack(this);
 			loader.execute(img);
-			//loader.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR,img);
-
-			Toast.makeText(Bingo.this,img,Toast.LENGTH_SHORT).show();
 		}
 		@Override
 		public Fragment getItem(int i)
-		{	switch(i)
+		{
+		    switch(i)
 			{
 				case 0:
 					Bundle bundle=new Bundle();
@@ -118,28 +113,45 @@ public class Bingo extends FragmentActivity {
 					out.setArguments(bundle);
 					return out;
 				case 1: case 5: case 10:case 15:
-					return  new Ads();
+					return new Ads();
 				default:
-					Bitmap tmp = data.get(i);
-					Bundle args = new Bundle();
+                    //Bitmap tmp = data.get(i-2);
+                    Bitmap tmp = data.get(0);
+                    Bundle args = new Bundle();
 					args.putParcelable("image", tmp);
-					Fragment fragment = new Image(tmp==null);
+					Fragment fragment = new Image();
 					fragment.setArguments(args);
 					return fragment;
-			}
+			}/*
+            if(i==0) {
+				Bundle bundle = new Bundle();
+                bundle.putString(Server.BINGO, bingo.toString());
+                DetailBingo out = new DetailBingo();
+                out.setArguments(bundle);
+                return out;
+            }
+           // int t=data.size();
+           // if(t<=i)i=t-1;
+            Bitmap tmp = data.get(i);
+            if(tmp==null)return new Ads();
+            Bundle args = new Bundle();
+			args.putParcelable("image", tmp);
+            Fragment fragment = new Image(tmp==null);
+            fragment.setArguments(args);
+            return fragment;*/
 		}
 		@Override
 		public int getCount()
         {
-            int i= data.size(),out=2;
+            /*int i= data.size();
             switch(i)
             {
-                case 0:out=2;break;
-                case 1:case 2:case 3:out=3;break;
-                case 4: case 5:out=4;break;
-                default:out=5;
-            }
-            return i+out;
+                case 0:return 2;
+                case 1:case 2:case 3:return i+3;
+                case 4: case 5:return i+4;
+                default:return i+5;
+            }*/
+            return 3;
         }
 		@Override
 		public CharSequence getPageTitle(int position)
@@ -150,9 +162,8 @@ public class Bingo extends FragmentActivity {
 	}
 	private class Image extends Fragment
 	{
-		private boolean camera;
-		public Image(boolean camera)
-		{	zoom=false;this.camera=camera;		}
+		public Image()
+		{	zoom=false;	}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -160,26 +171,26 @@ public class Bingo extends FragmentActivity {
 		{
 			final View root = inflater.inflate(R.layout.image, container, false);
 
-			Bundle args = getArguments();
-			Bitmap tmp = (Bitmap) args.get("image");
-			ImageView image = ((ImageView) root.findViewById(R.id.image));
-			ImageView imageFull = ((ImageView) root.findViewById(R.id.imageFull));
-			if (tmp != null && image != null )
+			//Bundle args = getArguments();
+			//Bitmap tmp = (Bitmap) args.get("image");
+			//ImageView image = ((ImageView) root.findViewById(R.id.image));
+			//ImageView imageFull = ((ImageView) root.findViewById(R.id.imageFull));
+			//if (tmp != null && image != null )
 			{
-				View.OnClickListener list=new View.OnClickListener()
+				/*View.OnClickListener list=new View.OnClickListener()
 				{
 					@Override
 					public void onClick(View arg0)
 					{	 fullScream(root);	}
-
-				};
-				image.setImageBitmap(tmp);
-				imageFull.setImageBitmap(tmp);
-				image.setOnClickListener(list);
-				imageFull.setOnClickListener(list);
+				};*/
+				//image.setImageBitmap(tmp);
+				//imageFull.setImageBitmap(tmp);
+				//image.setOnClickListener(list);
+				//imageFull.setOnClickListener(list);
 			}
 			return root;
 		}
+		/*
 		public void fullScream(View root)
 		{
 			if(zoom)
@@ -196,7 +207,6 @@ public class Bingo extends FragmentActivity {
 						.setVisibility(View.GONE);
 			}
 			zoom=!zoom;
-		}
+		}*/
 	}
-
 }

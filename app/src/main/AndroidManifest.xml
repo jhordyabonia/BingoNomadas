@@ -34,7 +34,7 @@
 
         <activity android:name=".Game" />
         <activity android:name=".Bingo" />
-        <activity android:name=".UserActivity"></activity>
+        <activity android:name=".UserActivity" />
     </application>
 
 </manifest>

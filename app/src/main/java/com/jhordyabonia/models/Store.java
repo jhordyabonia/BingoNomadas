@@ -13,7 +13,7 @@ import com.jhordyabonia.bn.Game;
 public class Store 
 {
 	public static final String STORE = "com.jhordyabonia.sbn.store",LAST_LOGUP="last_logup",
-			BINGO_NAME="bingo_name",BINGO_DATE="bingo_date",BINGO_LOGO="bingo_logo",BINGO_COST="bingo_cost",DIRECTORY=".BingoNomadas",
+			BINGO_NAME="bingo_name",BINGO_DATE="bingo_date",BINGO_LOGO="bingo_logo",BINGO_COST="bingo_cost",DIRECTORY=".BingoNomadas",//DIRECTORY=".BingoNomadas",
 			AUTHOR_NAME="author_name",AUTHOR_ADDRESS="author_address",AUTHOR_EMAIL="author_email",AUTHOR_CELLULAR="author_cellular",
 			AWARDS_NAME="awards_name",AWARDS_IMAGES="wards_images",PAY_INFO="pay_info",PAY_ACCOUNT_NUMBER="pay_account_number";
 		
