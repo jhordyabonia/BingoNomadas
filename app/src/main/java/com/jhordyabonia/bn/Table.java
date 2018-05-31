@@ -14,11 +14,15 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 {
 	public static final String ARG_SECTION_NUMBER = "section_number";    
 	ArrayList<Integer> already= new ArrayList<Integer>();
 	TextView number_now;
+	private AdView mAdView;
 	View root;
     Game GAME;
     @Override
@@ -34,6 +38,9 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
     	intent.putExtra(Connect.MESSENGER, messenger);
     	GAME.startService(intent);
         makeTable();
+		mAdView = (AdView)root.findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		mAdView.loadAd(adRequest);
     	return root;
     }
     private void makeTable()
