@@ -21,10 +21,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:gravity="center"
+        android:gravity="fill_horizontal"
         android:padding="5dp"
-        android:text="@string/text_welcome"
-        android:textColor="#fff"
+        android:shadowColor="#fff"
+        android:shadowDx="1"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:text="@string/msj_mindbreak"
+        android:textColor="#000"
+        android:textSize="20sp"
         android:textColorHint="#fff" />
 
 </LinearLayout>

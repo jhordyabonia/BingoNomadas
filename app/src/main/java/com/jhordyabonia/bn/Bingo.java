@@ -97,40 +97,32 @@ public class Bingo extends FragmentActivity {
 		@Override
 		public Fragment getItem(int i)
 		{
+			Fragment out;
+			Bundle args = new Bundle();
 		    switch(i)
 			{
 				case 0:
-					Bundle bundle=new Bundle();
-					bundle.putString(Server.BINGO,bingo.toString());
-					DetailBingo out=new DetailBingo();
-					out.setArguments(bundle);
-					return out;
+					args.putString(Server.BINGO,bingo.toString());
+					out=new DetailBingo();
+					break;
 				case 1: case 5: case 10:case 15:
-					return new Ads();
+					StringBuilder CONTAC_INFO= new StringBuilder();
+					CONTAC_INFO.append("Descripción:\n");
+					try {
+						CONTAC_INFO.append(bingo.getString(Store.BINGO_NAME));
+						CONTAC_INFO.append(" ");
+						CONTAC_INFO.append(bingo.getString(Store.AWARDS_NAME));
+					}catch(JSONException e){}
+					args.putString(Store.BINGO_NAME, CONTAC_INFO.toString());
+					out=new Ads();
+					break;
 				default:
 					String tmp = data.get(0);
-                    Bundle args = new Bundle();
 					args.putString("image", tmp);
-					Fragment fragment = new Foto();
-					fragment.setArguments(args);
-					return fragment;
-			}/*
-            if(i==0) {
-				Bundle bundle = new Bundle();
-                bundle.putString(Server.BINGO, bingo.toString());
-                DetailBingo out = new DetailBingo();
-                out.setArguments(bundle);
-                return out;
-            }
-           // int t=data.size();
-           // if(t<=i)i=t-1;
-            Bitmap tmp = data.get(i);
-            if(tmp==null)return new Ads();
-            Bundle args = new Bundle();
-			args.putParcelable("image", tmp);
-            Fragment fragment = new Image(tmp==null);
-            fragment.setArguments(args);
-            return fragment;*/
+					out = new Foto();
+			}
+			out.setArguments(args);
+			return out;
 		}
 		@Override
 		public int getCount()

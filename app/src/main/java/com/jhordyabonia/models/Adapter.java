@@ -68,12 +68,12 @@ public class Adapter extends ArrayAdapter<Adapter.Item>{
     }
     public static class Item
     {
-        String LOGO, EMAIL,NAME ,CELLULAR;
-        public Item(String n,String c,String e,String l)
-        { NAME=n;CELLULAR=c;EMAIL=e;LOGO=l; }
+        String LOGO, N_TABLES,NAME ,COST;
+        public Item(String n,String c,String nt,String l)
+        { NAME=n;COST=c;N_TABLES=nt;LOGO=l; }
         @Override
         public String toString()
-        {return NAME+" "+CELLULAR+" "+EMAIL+" "+CELLULAR;}
+        {return NAME+" "+COST+" "+N_TABLES;}
     }
 
     @Override
@@ -85,13 +85,13 @@ public class Adapter extends ArrayAdapter<Adapter.Item>{
         Item tmp = locale.get(position);
 
         ((TextView)root.findViewById(R.id.cellular))
-                .setText(tmp.CELLULAR);
+                .setText("$"+tmp.COST);
         ((TextView)root.findViewById(R.id.name))
                 .setText(tmp.NAME);
         ((TextView)root.findViewById(R.id.email))
-                .setText(tmp.EMAIL);
+                .setText(tmp.N_TABLES);
 
-        //if(tmp.LOGO.isEmpty())
+        if(!tmp.LOGO.isEmpty())
             setImage(root,tmp.LOGO);
 
         return root;

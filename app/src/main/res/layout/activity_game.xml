@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:paddingRight="10dp"
             android:paddingTop="1dp"
-            android:src="@android:drawable/ic_lock_silent_mode" />
+            android:src="@drawable/music" />
 
         <ImageView
             android:id="@+id/audio"
@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:paddingRight="10dp"
             android:paddingTop="1dp"
-            android:src="@android:drawable/ic_btn_speak_now" />
+            android:src="@drawable/speak" />
 
         <ImageView
             android:id="@+id/restart"

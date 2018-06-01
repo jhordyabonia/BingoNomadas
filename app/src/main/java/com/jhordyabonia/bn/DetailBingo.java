@@ -41,15 +41,12 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
         ((TextView)root.findViewById(R.id.bingo_date))
                 .setText(store.getString(Store.BINGO_DATE));
         ((TextView)root.findViewById(R.id.bingo_cost))
-                .setText(store.getString(Store.BINGO_COST));
+                .setText("$"+store.getString(Store.BINGO_COST));
         ((TextView)root.findViewById(R.id.awards_name))
                 .setText(store.getString(Store.AWARDS_NAME));
 
        // ((TextView)root.findViewById(R.id.bingo_description))
        //         .setText("");
-        ((TextView)root.findViewById(R.id.bingo_hour))
-                .setText("");
-        awards_images();
 
         ((TextView)root.findViewById(R.id.author_name))
                 .setText(store.getString(Store.AUTHOR_NAME));
@@ -57,15 +54,13 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
         StringBuilder CONTAC_INFO= new StringBuilder();
 
         CONTAC_INFO.append("Email: ");
-        CONTAC_INFO.append(store.getString(Store.AUTHOR_CELLULAR));
-        CONTAC_INFO.append("\nWhatsapp: ");
         CONTAC_INFO.append(store.getString(Store.AUTHOR_EMAIL));
+        CONTAC_INFO.append("\nWhatsapp: ");
+        CONTAC_INFO.append(store.getString(Store.AUTHOR_CELLULAR));
         ((TextView)root.findViewById(R.id.author_contac))
                 .setText(CONTAC_INFO);
 
         ((TextView)root.findViewById(R.id.author_address))
                 .setText(store.getString(Store.AUTHOR_ADDRESS));
     }
-
-    private String awards_images(){return "";}
 }

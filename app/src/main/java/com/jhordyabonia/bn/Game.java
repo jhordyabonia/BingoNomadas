@@ -43,11 +43,11 @@ public class Game extends FragmentActivity
 			case R.id.music:
 				if(MUSIC)
 				{
-					bMusic.setImageResource(android.R.drawable.ic_lock_silent_mode);
+					bMusic.setImageResource(R.drawable.music);
 					mMusic.pause();
 				}else
 				{
-					bMusic.setImageResource(android.R.drawable.ic_lock_silent_mode_off);
+					bMusic.setImageResource(R.drawable.music_);
 					mMusic.start();
 				}MUSIC=!MUSIC;
 				editor.putBoolean(_MUSIC, MUSIC);
@@ -56,10 +56,10 @@ public class Game extends FragmentActivity
 			case R.id.audio:
 				if(AUDIO)
 				{
-					bAudio.setImageResource(android.R.drawable.ic_lock_silent_mode);
+					bAudio.setImageResource(R.drawable.speak);
 					mAudio.start();
 				}else {
-					bAudio.setImageResource(android.R.drawable.ic_lock_silent_mode_off);
+					bAudio.setImageResource(R.drawable.speak_);
 					mAudio.pause();
 					mLine.pause();
 				}			    
@@ -102,10 +102,10 @@ public class Game extends FragmentActivity
         
         MUSIC=file.getBoolean(_MUSIC, MUSIC);
         if(!AUDIO)        	
-			bAudio.setImageResource(android.R.drawable.ic_lock_silent_mode); 
+			bAudio.setImageResource(R.drawable.speak_);
 
         if(!MUSIC)
-        	bMusic.setImageResource(android.R.drawable.ic_lock_silent_mode);
+        	bMusic.setImageResource(R.drawable.music_);
         else mMusic.start();    
         
         user=new User(this);

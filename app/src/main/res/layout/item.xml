@@ -80,7 +80,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:alpha="0.8"
-                            android:gravity="left"
+                            android:gravity="center_vertical"
                             android:paddingBottom="2sp"
                             android:paddingRight="2sp"
                             android:text="$10.000.00"
