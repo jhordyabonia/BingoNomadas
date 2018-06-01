@@ -111,8 +111,8 @@ public class List extends FragmentActivity implements View.OnClickListener,
 
                 base.clear();
                 for(int u=0;u<store_raw.length();u++) {
-                    JSONObject obj = new JSONObject(
-                            store_raw.getJSONObject(u).getString(Server.BINGO));
+                    JSONObject obj =
+                        new JSONObject(store_raw.getJSONObject(u).getString(Server.BINGO));
                     int n=obj.getJSONArray(Game.TABLES).length();
                     Adapter.Item tt = new Adapter.Item(obj.getString(Store.BINGO_NAME)
                             , obj.getString(Store.BINGO_COST), "Tablas registradas: "+n
@@ -131,6 +131,12 @@ public class List extends FragmentActivity implements View.OnClickListener,
                    Intent intent = new Intent(List.this, Bingo.class);
                    String id = store_raw.getJSONObject(arg2).getString(Server.ID);
                    String bingo = store_raw.getJSONObject(arg2).getString(Server.BINGO);
+
+                   int Mtimmer = store_raw.getJSONObject(arg2).getInt(Server._TIMMER);
+                   boolean local = store_raw.getJSONObject(arg2).getInt(Server._LOCAL)!=0;
+                   intent.putExtra(Server._LOCAL, local);
+                   intent.putExtra(Server._TIMMER, Mtimmer);
+
                    intent.putExtra(Server.ID, id);
                    intent.putExtra(Server.BINGO, bingo);
                    startActivity(intent);

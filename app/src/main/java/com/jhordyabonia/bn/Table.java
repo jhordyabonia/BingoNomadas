@@ -32,11 +32,12 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
         root= inflater.inflate(R.layout.table, container, false);
         number_now=((TextView)root.findViewById(R.id.number_now));
         GAME=(Game)getActivity();
-        
-        Messenger messenger= new Messenger(new Connect.MHandler(this));
-    	Intent intent = new Intent(GAME,Connect.class);
-    	intent.putExtra(Connect.MESSENGER, messenger);
-    	GAME.startService(intent);
+
+		Messenger messenger= new Messenger(new Connect.MHandler(this));
+		Intent intent = new Intent(GAME,Connect.class);
+		intent.putExtra(Connect.MESSENGER, messenger);
+		GAME.startService(intent);
+
         makeTable();
 		mAdView = (AdView)root.findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();

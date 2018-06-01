@@ -8,10 +8,10 @@ import com.jhordyabonia.webservice.Client;
 import android.app.Activity;
 
 public final class Server {
-	public static String URL_SERVER = "http://123seller.azurewebsites.net/bn/";
+	public static String URL_SERVER = "http://floverso-001-site20.gtempurl.com/sample/bn/";
+	//public static String URL_SERVER = "http://123seller.azurewebsites.net/bn/";
 	//public static String URL_SERVER = "http://192.168.33.10/bn/bn/";
-	public static final String ID="id",BINGO="bingo",CELLULAR="cellular",EMAIL="email"
-			,NAME="nombre",NUMBER="number";
+	public static final String ID="id",BINGO="bingo",CELLULAR="cellular",_TIMMER="timmer",_LOCAL="local";
 	
 	private static Client ws;
 	private static HashMap<String, String> data_toSend = new HashMap<String, String>();
@@ -28,5 +28,4 @@ public final class Server {
 		ws.setCallback(t);
 		ws.execute("");
 	}
-
 }

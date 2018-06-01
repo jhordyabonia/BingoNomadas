@@ -38,7 +38,9 @@ public class Bingo extends FragmentActivity {
 	private ViewPager galery;
 	private AdView mAdView;
 	private JSONObject bingo;
-	String ID="";
+	String id="";
+	boolean local;
+	int timmer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,9 @@ public class Bingo extends FragmentActivity {
 		try
 		{
 			bingo = new JSONObject(intent.getStringExtra(Server.BINGO));
-			ID = intent.getStringExtra(Server.ID);
+			id = intent.getStringExtra(Server.ID);
+			timmer = intent.getIntExtra(Server._TIMMER,5000);
+			local = intent.getBooleanExtra(Server._LOCAL,true);
 			((TextView)findViewById(R.id.bingo_name))
 					.setText(bingo.getString(Store.BINGO_NAME));
 
@@ -79,7 +83,10 @@ public class Bingo extends FragmentActivity {
 	}
 	public void launchGame(){
 		Intent intent = new Intent(Bingo.this, Game.class);
-		intent.putExtra(Server.ID,ID);
+		intent.putExtra(Server.BINGO,bingo.toString());
+		intent.putExtra(Server.ID,id);
+		intent.putExtra(Server._TIMMER,timmer);
+		intent.putExtra(Server._LOCAL,local);
 		startActivity(intent);
 		finish();
 	}

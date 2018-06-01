@@ -277,7 +277,7 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
                 for (int y = 0; y < messages.length(); y++) {
                     JSONObject message = messages.optJSONObject(y);
                     if (message != null){}
-                    // rewards.add(message.getInt(User._COINS),
+                    // rewards.details_on_play(message.getInt(User._COINS),
                     //       message.getString(Rewards._MESSAGE));
                 }
             // rewards.save(getActivity());

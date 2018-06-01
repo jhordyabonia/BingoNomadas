@@ -1,6 +1,7 @@
 package com.jhordyabonia.bn;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import org.json.JSONException;
 
@@ -21,11 +22,10 @@ import com.jhordyabonia.webservice.Asynchtask;
     {	
 		public  static final String MESSENGER = "messenger";
 		private  static final String MENSAJE_NUEVO = "mensaje_nuevo";
+		private Random ram=new Random();
 		private Messenger messenger;
-		//temp dummy
 		private int count=75;
 		private  ArrayList<Integer> already= new ArrayList<Integer>();
-		//temp dummy
     	User user;
 		protected boolean STOP=false;
     	public interface Inbox
@@ -57,9 +57,9 @@ import com.jhordyabonia.webservice.Asynchtask;
     		STOP=false;
     		already.clear();
     		user=new User(this);
-    		if(extras !=null) 
-    			messenger = (Messenger) extras.get(MESSENGER);
-    		get();
+    		if(extras !=null)
+				messenger = (Messenger) extras.get(MESSENGER);
+			get();
     		return super.onStartCommand(intent, flags, startId);	
     	}	
     	@Override
@@ -93,33 +93,29 @@ import com.jhordyabonia.webservice.Asynchtask;
 			Server.send(Game.ONPLAY, null, this);
 		}
 		private void get()
-    	{
-    		//pull();
-			(new AsyncTask<Boolean, Void, Boolean>()
+    	{(new AsyncTask<Boolean, Void, Boolean>()
 			{
 		        @Override
 				protected Boolean doInBackground(Boolean... arg0)
 				{
-					try {Thread.sleep(5000);}
+					try {Thread.sleep(Game.TIMMER);}
 					catch (InterruptedException e) {}
 					return false;
 				}
 				@Override
 				protected void onPostExecute(Boolean v)
 				{
-					pull();
-					//Servicio dummy Temporal
-					/*
-					Random r=new Random();
-					int n=(r.nextInt(count)+1),c=0;
+					if(!Game.LOCAL)
+					{	pull(); }
+					else {
+					int n=(ram.nextInt(count)+1),c=0;
 					while(already.indexOf(n)!=-1)
 						if(c++>=count) {n=0;STOP=true;break;}
-						else n=(r.nextInt(count)+1);
+						else n=(ram.nextInt(count)+1);
 					already.add(n);
 					processFinish(""+n);
 					count=75;
-					*/
-					//Servicio dummy Temporal
+					}
 				}	
 			}).execute();
     	}
