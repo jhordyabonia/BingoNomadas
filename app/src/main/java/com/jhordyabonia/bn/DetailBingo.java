@@ -45,8 +45,8 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
         ((TextView)root.findViewById(R.id.awards_name))
                 .setText(store.getString(Store.AWARDS_NAME));
 
-        ((TextView)root.findViewById(R.id.bingo_description))
-                .setText("");
+       // ((TextView)root.findViewById(R.id.bingo_description))
+       //         .setText("");
         ((TextView)root.findViewById(R.id.bingo_hour))
                 .setText("");
         awards_images();

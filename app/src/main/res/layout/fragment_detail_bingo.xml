@@ -8,12 +8,19 @@
     tools:context=".List">
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@drawable/transparent"
+        android:paddingTop="25dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="5dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
@@ -22,7 +29,8 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Organizador:" />
+                android:text="Organizador:"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/author_name"
@@ -30,13 +38,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Jhordy Abonia Guaza"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Costo" />
+                android:text="Costo:"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/bingo_cost"
@@ -44,13 +54,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="$10.000.oo"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha:" />
+                android:text="Fecha:"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/bingo_date"
@@ -58,13 +70,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="18 -May 2018"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hora" />
+                android:text="Hora"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/bingo_hour"
@@ -72,27 +86,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="08:00 AM"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descripcion" />
+                android:text="Descripcion"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/bingo_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Loren ipsum lorednsjdnsadsa dsad  dsdadadffdsfccd"
+                android:text="@string/msj_mindbreak"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Premios" />
+                android:text="Premios"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/awards_name"
@@ -100,13 +118,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Smart Tv Samgun, Labtop HP,etc..."
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Direccion" />
+                android:text="Direccion"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/author_address"
@@ -114,13 +134,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Av 5Nc # 47n-41 Br/ La Flora, Cali"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Contacto:" />
+                android:text="Contacto:"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/author_contac"
@@ -129,6 +151,7 @@
                 android:layout_marginLeft="30dp"
                 android:gravity="center"
                 android:text="Email: bingos bngos@gmail.com Whatsapp: 3158241415 - 3201457895"
+                android:textColor="#ffffff"
                 android:textSize="17dp" />
         </LinearLayout>
     </ScrollView>
