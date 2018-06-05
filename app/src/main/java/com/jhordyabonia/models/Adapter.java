@@ -28,12 +28,21 @@ import com.jhordyabonia.util.Server;
 public class Adapter extends ArrayAdapter<Adapter.Item>{
 
     Context context;
+    int layout=R.layout.item;
     private ArrayList<Item> locale;
     public Adapter(Context c,ArrayList<Item> l)
     {
         super(c,R.layout.item,l);
         locale=l;
         context=c;
+    }
+
+    public Adapter(Context c,ArrayList<Item> l,int layout)
+    {
+        super(c,layout,l);
+        locale=l;
+        context=c;
+        this.layout=layout;
     }
     private void setImage(final View root,final String image)
     {
@@ -81,7 +90,7 @@ public class Adapter extends ArrayAdapter<Adapter.Item>{
     {
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        final View root = inflater.inflate(R.layout.item,null);
+        final View root = inflater.inflate(layout,null);
         Item tmp = locale.get(position);
 
         ((TextView)root.findViewById(R.id.cellular))

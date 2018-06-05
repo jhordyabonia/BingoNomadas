@@ -13,12 +13,13 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Game extends FragmentActivity implements Asynchtask
+public class Game extends FragmentActivity
 {  
 	public static final String GAME = "com.jhordyabonia.bn.file",
 	_AUDIO="audio",_MUSIC="music", ONPLAY="onPlay",TABLES="tables";
@@ -45,8 +46,7 @@ public class Game extends FragmentActivity implements Asynchtask
 	/**Prefix b as bVar is button */
 	ImageView bMusic,bAudio,bRestart;
 	MediaPlayer mAudio,mMusic,mWin,mLose,mLine;
-	DialogFragment add;
-	Adapter base;
+	MakeDialog add;
 	public static int TIMMER=5000;
 	public static boolean LOCAL=true;
 	public static String ID="3158241412";
@@ -61,9 +61,10 @@ public class Game extends FragmentActivity implements Asynchtask
 			SharedPreferences.Editor editor = file.edit();
 			switch(arg0.getId())
 			{
+				case R.id.bingo:
+					break;
 				case R.id.restart:
-					pull();
-					add.show(Game.this.getSupportFragmentManager(), "missiles");
+					add.show(Game.this.getSupportFragmentManager());
 					break;
 				case R.id.music:
 				if(MUSIC)
@@ -141,7 +142,6 @@ public class Game extends FragmentActivity implements Asynchtask
 					public void onInit(int arg0) {}
 				});
 
-		base = new Adapter(this,new ArrayList<Adapter.Item>());
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(
         	new  FragmentPagerAdapter(getSupportFragmentManager()) 
@@ -159,13 +159,13 @@ public class Game extends FragmentActivity implements Asynchtask
 	            @Override
 	            public CharSequence getPageTitle(int position){return null;}
         });
-		makeDialog();
+		add= new MakeDialog();
         Intent intent =getIntent();
         if(intent==null)
 		{	finish();return;}
         ID=intent.getStringExtra(Server.ID);
 		TIMMER = intent.getIntExtra(Server._TIMMER,5000);
-		LOCAL = intent.getBooleanExtra(Server._LOCAL,true);
+		//LOCAL = intent.getBooleanExtra(Server._LOCAL,true);
        }
     @Override
     protected void onDestroy()
@@ -199,89 +199,73 @@ public class Game extends FragmentActivity implements Asynchtask
 		mWin.release();
 		mLine.release();
 	}
-	@Override
-	public void processFinish(String json)
+
+	//@SuppressLint()
+	public static class MakeDialog extends DialogFragment implements Asynchtask
 	{
-		String title="Bingo Nomada";
-
-		((TextView)findViewById(R.id.title))
-				.setText(title);
-		try
-		{
-			JSONArray store_raw=new JSONArray(json);
-
-			base.clear();
-			for(int u=0;u<store_raw.length();u++) {
-				JSONObject obj =
-						new JSONObject(store_raw.getJSONObject(u).getString(Server.BINGO));
-
-				/*Adapter.Item tt = new Adapter.Item(obj.getString(Store.AUTHOR_NAME)
-						, obj.getString(Store.TYPE), "Tablas registradas: "
-						,  obj.getString(Store.AUTHOR_FOTO));*/
-
-				Adapter.Item tt = new Adapter.Item(obj.getString(Store.AUTHOR_NAME)
-						, "Biiingo!!!", "no se que poner aqui "
-						, "4.jpg");
-				base.add(tt);
-			}
-			base.setDropDownViewResource(base.getCount() - 1);
-		}catch(JSONException e){}
-		//Dummy
-		base.clear();
-		for(int u=0;u<4;u++) {
-
-			Adapter.Item tt = new Adapter.Item("Usuario " + u
-					, "Biiingo!!!", "no se que poner aqui "
-					, "4.jpg");
-			base.add(tt);
-		}
-		//Dummy
-
-	}
-	private void pull()
-	{
-		HashMap<String, String> datos=new HashMap<String, String>();
-		datos.put(Server.ID,ID);
-		Server.setDataToSend(datos);
-		Server.send("details", this, this);
-	}
-	private void makeDialog()
-	{
-		add = new DialogFragment()
-		{
+			View root;
+			Adapter base;
 			@Override
 			public Dialog onCreateDialog(Bundle savedInstanceState)
 			{
 				AlertDialog.Builder builder =
-						new AlertDialog.Builder(Game.this);
+						new AlertDialog.Builder(getContext());
+				LayoutInflater inflater = getActivity().getLayoutInflater();
 
-				View root = Game.this.getLayoutInflater()
-						.inflate(R.layout.details_on_play, null);
+				root=inflater.inflate(R.layout.details_on_play, null);
+				ListView view =(ListView)root.findViewById(R.id.details);
 
-				ListView view =(ListView)findViewById(R.id.tables);
-
+				base = new Adapter(getContext(),new ArrayList<Adapter.Item>(),R.layout.item2);
+				view.setAdapter(base);
 				DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()
 				{
 					@Override
 					public void onClick(DialogInterface dialog, int which)
-					{
-						/*if(which==DialogInterface.BUTTON_POSITIVE)
-						{
-						}
-						else */dialog.dismiss();
-					}
+					{dialog.dismiss();}
 				};
 
-				builder.setTitle("Detalles del juego")
+				builder.setTitle("Ganadores!!!")
 						.setIcon(R.drawable.ic_launcher)
-						.setView(view)
+						.setView(root)
 						.setNegativeButton("Cerrar", listener)
 						.setPositiveButton(" Ok ", listener)
 						.setCancelable(false);
 				return builder.create();
 			}
+			@Override
+			public void processFinish(String json)
+			{
+				String title="Bingo Nomada";
+				try
+				{
+					JSONObject store=new JSONObject(json);
+					JSONArray store_raw=store.getJSONArray(Game.TABLES);
+					title=store.getString(Store.BINGO_NAME);
+					base.clear();
+					for(int u=1;u<store_raw.length();u++) {
+						JSONObject obj =store_raw.getJSONObject(u);
+
+						Adapter.Item tt = new Adapter.Item(obj.getString(User._NAME)
+								, u+ " Lugar!!!", "no se que poner aqui "
+								, "4.jpg");
+						base.add(tt);
+					}
+					base.setDropDownViewResource(base.getCount() - 1);
+				}catch(JSONException e){}
+				((TextView)root.findViewById(R.id.title))
+						.setText(title);
+
+			}
+			public void show(FragmentManager arg0)
+			{
+				show(arg0, "missiles");
+				HashMap<String, String> datos=new HashMap<String, String>();
+				datos.put(Server.ID,ID);
+				Server.setDataToSend(datos);
+				Server.send("winners", null, this);
+			}
 		};
-	}
+
 	public static int ID_NUMBERS[]=
 		{
 			R.id.TextView01,

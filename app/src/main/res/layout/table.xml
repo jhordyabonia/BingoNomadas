@@ -25,7 +25,11 @@
             android:padding="3dp"
             android:text="75"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="50dp" />
+            android:textSize="50dp"
+            android:shadowColor="#000000"
+            android:shadowRadius="5"
+            android:shadowDx="1"
+            android:shadowDy="3" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -47,11 +51,15 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="35dp"
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="01"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/TextView19"
@@ -62,6 +70,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="02"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -73,6 +85,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="03"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -84,6 +100,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="04"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -95,6 +115,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="05"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </TableRow>
 
@@ -114,6 +138,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="01"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -125,6 +153,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="02"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -136,6 +168,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="03"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -147,6 +183,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="04"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -158,6 +198,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="05"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </TableRow>
 
@@ -177,6 +221,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="01"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -188,6 +236,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="02"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -197,6 +249,10 @@
                     android:textSize="35dp"
                     android:gravity="center"
                     android:padding="3dp"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -208,6 +264,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="04"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -219,6 +279,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="05"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </TableRow>
 
@@ -238,6 +302,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="01"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -249,6 +317,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="02"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -260,6 +332,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="03"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -271,6 +347,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="04"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -282,6 +362,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="05"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </TableRow>
 
@@ -301,6 +385,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="01"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -312,6 +400,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="02"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -320,10 +412,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="35dp"
-                    android:background="@drawable/number_marked"
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="03"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -335,6 +430,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="04"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
@@ -346,6 +445,10 @@
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="05"
+                    android:shadowColor="#000000"
+                    android:shadowRadius="5"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
             </TableRow>
         </TableLayout>
@@ -363,7 +466,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bingo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
@@ -375,17 +478,25 @@
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="normal|bold|italic"
-        android:typeface="serif" />
+        android:typeface="serif"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
+        android:shadowDx="1"
+        android:shadowDy="3" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/last"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:rotationX="20"
         android:rotationY="330"
-        android:text="01 67 43  07"
-        android:textSize="26sp"
+        android:text="01 67 43 07"
         android:textColor="#c6c6c6"
-        android:typeface="serif" />
+        android:textSize="26sp"
+        android:typeface="serif"
+        android:shadowColor="#000000"
+        android:shadowRadius="5"
+        android:shadowDx="1"
+        android:shadowDy="3" />
 </FrameLayout>
