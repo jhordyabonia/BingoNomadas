@@ -499,4 +499,14 @@
         android:shadowRadius="5"
         android:shadowDx="1"
         android:shadowDy="3" />
+
+
+    <ImageView
+        android:id="@+id/win"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/win"
+        android:scaleType="centerInside"
+        android:src="@drawable/win_1"
+        android:visibility="gone" />
 </FrameLayout>

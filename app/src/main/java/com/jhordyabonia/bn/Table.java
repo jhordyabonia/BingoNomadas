@@ -6,11 +6,9 @@ import java.util.Random;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Messenger;
 import android.speech.tts.TextToSpeech;
@@ -20,15 +18,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.jhordyabonia.models.Store;
-import com.jhordyabonia.models.User;
 import com.jhordyabonia.util.Server;
 import com.jhordyabonia.webservice.Asynchtask;
 
@@ -67,6 +61,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		GAME.startService(intent);
 
         makeTable();
+
 		mAdView = (AdView)root.findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
@@ -99,7 +94,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
     @Override
 	public void onClick(View arg0) 
 	{
-	    try
+		try
 	    {
 	    	TextView number=(TextView)arg0;
 			int m=Integer.valueOf(number.getText().toString());
@@ -148,6 +143,13 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 			return builder.create();
 		}
 	};
+    private void showWin()
+	{
+		root.findViewById(R.id.win).setVisibility(View.VISIBLE);
+		AnimationDrawable anim =(AnimationDrawable)
+				root.findViewById(R.id.win).getBackground();
+		anim.start();
+	}
     private boolean get(int id)
 	{
         return root.findViewById(id).getBackground()!=null;
@@ -183,7 +185,10 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				{
 					@Override
 					public void processFinish(String result) {
-						//anmiacion celebracion ganar
+						try{
+							Integer.valueOf(result);
+							showWin();
+						}catch(NumberFormatException e){}
 						Toast.makeText(GAME,result,Toast.LENGTH_SHORT).show();
 					}
 				});
