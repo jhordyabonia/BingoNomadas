@@ -16,6 +16,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.jhordyabonia.models.Adapter;
 import com.jhordyabonia.models.Store;
+import com.jhordyabonia.models.User;
 import com.jhordyabonia.util.Server;
 import com.jhordyabonia.webservice.Asynchtask;
 
@@ -32,6 +33,7 @@ public class List extends FragmentActivity implements View.OnClickListener,
     Adapter base;
     ListView view;
     SearchView mSearchView;
+    User user;
     JSONArray store_raw;
     private AdView mAdView;
 
@@ -66,6 +68,7 @@ public class List extends FragmentActivity implements View.OnClickListener,
         mAdView = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        user=new User(this);
         }
 
         private void setupSearchView() {
@@ -91,6 +94,12 @@ public class List extends FragmentActivity implements View.OnClickListener,
         public void onResume()
         {
             super.onResume();
+            if (user.cel().isEmpty()) {
+                Intent intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
             pull();
         }
         private void pull()

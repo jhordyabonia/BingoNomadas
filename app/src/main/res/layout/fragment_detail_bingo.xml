@@ -19,11 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="vertical">
+            android:paddingTop="25dp">
 
             <TextView
                 android:id="@+id/textView"
@@ -80,24 +82,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Descripcion:"
-                android:textColor="#ffffff"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/bingo_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="@string/msj_mindbreak"
-                android:textColor="#ffffff"
-                android:textSize="17dp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Premios:"
+                android:text="Decripcion y premios:"
                 android:textColor="#ffffff"
                 android:textStyle="bold" />
 
@@ -133,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="Contacto:"
                 android:textColor="#ffffff"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/author_contac"

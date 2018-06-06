@@ -8,8 +8,8 @@ import com.jhordyabonia.webservice.Client;
 import android.app.Activity;
 
 public final class Server {
-	public static String URL_SERVER = "http://floverso-001-site20.gtempurl.com/sample/bn/";
-	//public static String URL_SERVER = "http://123seller.azurewebsites.net/bn/";
+	//public static String URL_SERVER = "http://floverso-001-site20.gtempurl.com/sample/bn/";
+	public static String URL_SERVER = "http://123seller.azurewebsites.net/bn/";
 	//public static String URL_SERVER = "http://192.168.33.10/bn/bn/";
 	public static final String ID="id",BINGO="bingo",CELLULAR="cellular",_TIMMER="timmer",_LOCAL="local";
 	

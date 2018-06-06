@@ -39,8 +39,8 @@ public class Bingo extends FragmentActivity {
 	private AdView mAdView;
 	private JSONObject bingo;
 	String id="";
-	boolean local;
-	int timmer;
+	public static boolean LOCAL;
+	public static int TIMMER;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +66,8 @@ public class Bingo extends FragmentActivity {
 		{
 			bingo = new JSONObject(intent.getStringExtra(Server.BINGO));
 			id = intent.getStringExtra(Server.ID);
-			timmer = intent.getIntExtra(Server._TIMMER,5000);
-			local = intent.getBooleanExtra(Server._LOCAL,true);
+			TIMMER = intent.getIntExtra(Server._TIMMER,5000);
+			LOCAL = intent.getBooleanExtra(Server._LOCAL,true);
 			((TextView)findViewById(R.id.bingo_name))
 					.setText(bingo.getString(Store.BINGO_NAME));
 
@@ -85,8 +85,6 @@ public class Bingo extends FragmentActivity {
 		Intent intent = new Intent(Bingo.this, Game.class);
 		intent.putExtra(Server.BINGO,bingo.toString());
 		intent.putExtra(Server.ID,id);
-		intent.putExtra(Server._TIMMER,timmer);
-		intent.putExtra(Server._LOCAL,local);
 		startActivity(intent);
 		finish();
 	}

@@ -1,13 +1,18 @@
 package com.jhordyabonia.bn;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jhordyabonia.models.Store;
+import com.jhordyabonia.models.User;
 import com.jhordyabonia.util.Server;
 
 import org.json.JSONException;
@@ -15,8 +20,10 @@ import org.json.JSONObject;
 
 public class DetailBingo extends Fragment implements View.OnClickListener{
     View root;
+    NoTable noTable;
     private JSONObject store;
     Bingo BINGO;
+    User user;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -24,8 +31,9 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
         root =inflater.inflate(R.layout.fragment_detail_bingo,container,false);
         root.findViewById(R.id.launch).setOnClickListener(this);
         BINGO=(Bingo)getActivity();
-        Bundle arg = getArguments();
+        user= new User(BINGO);
         try {
+            Bundle arg = getArguments();
             store = new JSONObject(arg.getString(Server.BINGO));
             load();
         } catch(JSONException e){}
@@ -34,8 +42,28 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
     }
     @Override
     public void onClick(View v) {
-        BINGO.launchGame();
+        String tables="";
+        try {tables=store.getString(Game.TABLES);}
+        catch(JSONException e){}
+        if(BINGO.LOCAL)
+            BINGO.launchGame();
+        else if (tables.contains(user.cel()))
+            BINGO.launchGame();
+        else    noTable.show(BINGO.getSupportFragmentManager(),"missiles");
     }
+    public static class NoTable extends DialogFragment
+    {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState)
+        {
+            AlertDialog.Builder builder =
+                    new AlertDialog.Builder(getContext());
+
+            Bundle args = getArguments();
+            builder.setTitle(args.getString(Store.PAY_INFO));
+            return builder.create();
+        }
+    };
     private void load() throws JSONException {
 
         ((TextView)root.findViewById(R.id.bingo_date))
@@ -45,8 +73,14 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
         ((TextView)root.findViewById(R.id.awards_name))
                 .setText(store.getString(Store.AWARDS_NAME));
 
-       // ((TextView)root.findViewById(R.id.bingo_description))
-       //         .setText("");
+        if(BINGO.LOCAL)
+            ((TextView)root.findViewById(R.id.launch))
+                 .setText("Jugar");
+        else  if(store.getString(Game.TABLES).contains(user.cel()))
+            ((TextView)root.findViewById(R.id.launch))
+                    .setText("Jugar");
+        else ((TextView)root.findViewById(R.id.launch))
+                 .setText("Comprar Tabla");
 
         ((TextView)root.findViewById(R.id.author_name))
                 .setText(store.getString(Store.AUTHOR_NAME));
@@ -62,5 +96,10 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
 
         ((TextView)root.findViewById(R.id.author_address))
                 .setText(store.getString(Store.AUTHOR_ADDRESS));
+
+        Bundle b= new Bundle();
+        b.putString(Store.PAY_INFO,store.getString(Store.PAY_INFO));
+        noTable= new NoTable();
+        noTable.setArguments(b);
     }
 }

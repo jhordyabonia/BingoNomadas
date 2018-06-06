@@ -98,14 +98,14 @@ import com.jhordyabonia.webservice.Asynchtask;
 		        @Override
 				protected Boolean doInBackground(Boolean... arg0)
 				{
-					try {Thread.sleep(Game.TIMMER);}
+					try {Thread.sleep(Bingo.TIMMER);}
 					catch (InterruptedException e) {}
 					return false;
 				}
 				@Override
 				protected void onPostExecute(Boolean v)
 				{
-					if(!Game.LOCAL)
+					if(!Bingo.LOCAL)
 					{	pull(); }
 					else {
 					int n=(ram.nextInt(count)+1),c=0;

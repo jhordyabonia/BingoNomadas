@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class User 
 {
 	public static final String USER = "com.jhordyabonia.bn.user",
-		_NAME="name",_EMAIL="email",_CEL="cel",_REF="ref",_COINS="coins", _PASS = "pass" ;
+		_NAME="name",_EMAIL="email",_CEL="cellular",_COINS="coins", _PASS = "pass" ;
 
 	SharedPreferences user;
 	SharedPreferences.Editor editor;
@@ -33,13 +33,6 @@ public class User
 		 editor.putString(_CEL,cel);
 		 editor.commit();
 	}
-	public void setRef(String ref )
-	{
-		if(ref().equals("0"))
-			ref="";
-		editor.putString(_REF,ref);
-		editor.commit();
-	}
 	public void setCoins(int coins)
 	{
 		if(coins>99999)return;
@@ -54,8 +47,6 @@ public class User
 	{return user.getString(_CEL,"");}
 	public int coins()
 	{return user.getInt(_COINS,0);	}
-	public String ref()
-	{return user.getString(_REF,"");}
 	public String pass()
 	{return user.getString(_PASS,"");}
 

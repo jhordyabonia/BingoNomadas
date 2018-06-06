@@ -28,14 +28,13 @@ import java.util.regex.Pattern;
 public class UserActivity extends Activity implements View.OnClickListener,Asynchtask {
 
     EditText name, email, cel;
-    TextView coins, new_user;//, pass, pass2;
+    TextView coins, new_user;
     User user;
     private AdView mAdView;
 
     @Override
     public void onResume() {
         super.onResume();
-        make();
     }
 
     private void resetPass() {
@@ -60,62 +59,36 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
         setContentView(R.layout.activity_user);
         user = new User(this);
 
+        make();
         mAdView = (AdView)findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
     private void make()
     {
-        //share = root.findViewById(R.id.share);
-        //new_user = (TextView) root.findViewById(R.id.new_user);
         name = (EditText) findViewById(R.id.name);
         email = (EditText) findViewById(R.id.email);
         cel = (EditText) findViewById(R.id.cel);
         name.setText(user.name());
         email.setText(user.email());
         cel.setText(user.cel());
-        //ref = (EditText) root.findViewById(R.id.ref);
-        // pass = (EditText) root.findViewById(R.id.pass);
-        //  pass2 = (EditText) root.findViewById(R.id.pass2);
         findViewById(R.id.save).setOnClickListener(this);
-        //findViewById(R.id.tableRow1).setOnClickListener(this);
-
-        //share.setOnClickListener(this);
-        //new_user.setOnClickListener(this);
-
-        //coins = (TextView) root.findViewById(R.id.coins);
-        //coins.setText("$" + user.coins());
     }
 
     @Override
     public void onClick(View arg0) {
-        if (arg0.getId() == R.id.tableRow1) {
-            //Intent intent = new Intent(this, Coins.class);
-            //startActivity(intent);
-        }  else if (arg0.getId() == R.id.save) {
+        if (arg0.getId() == R.id.save)
+        {
             String _name = name.getText().toString().trim(),
-                    // _pass = pass.getText().toString().trim(),
-                    // _pass2 = pass2.getText().toString().trim(),
                     _cel = cel.getText().toString().trim(),
                     _email = email.getText().toString().trim();
 
-            if (name.getVisibility() == View.VISIBLE) {
-                // if (!validate("n" + _name, "e" + _email, "c" + _cel, "p" + _pass, "2" + _pass + ":=" + _pass2))
-                if (!validate("n" + _name, "e" + _email, "c" + _cel))//temp no password now
-                    return;
-            } else if (!validate("c" + _cel))
+            if (!validate("n" + _name, "e" + _email, "c" + _cel))
                 return;
             HashMap<String, String> datos = new HashMap<String, String>();
             datos.put(User._NAME, _name);
-           // datos.put(User._PASS, _pass);
             datos.put(User._CEL, _cel);
             datos.put(User._EMAIL, _email);
-            //if (user.ref().isEmpty())
-            //    datos.put(User._REF, ref.getText().toString().trim());
-           // else if (user.ref().equals("0"))
-           //     datos.put(User._REF, ref.getText().toString().trim());
-           // else datos.put(User._REF, "");
-
             Server.setDataToSend(datos);
             Server.send("singup",this, this);
 
@@ -127,13 +100,6 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
 
             if (intent.resolveActivity(getPackageManager()) != null)
                 startActivity(chooser);
-        } else if (arg0.getId() == R.id.new_user) {
-            name.setVisibility(View.VISIBLE);
-            email.setVisibility(View.VISIBLE);
-            //pass2.setVisibility(View.VISIBLE);
-            new_user.setVisibility(View.GONE);
-        } else {
-            coins.setText("$" + user.coins());
         }
     }
 
@@ -258,36 +224,22 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
 
     @Override
     public void processFinish(String result) {
-        try {
-            JSONObject obj = new JSONObject(result);
-            JSONObject u = obj.getJSONObject("user");
+       try {
+            JSONObject u = new JSONObject(result);
             if (u != null) {
+                boolean first=user.cel().isEmpty();
                 user.setName(u.getString(User._NAME));
                 user.setEmail(u.getString(User._EMAIL));
                 user.setCel(u.getString(User._CEL));
-                //String t = u.getString(User._REF);
-                //if (!t.equals("null"))
-                //   user.setRef(t);
-                //String _pass = pass.getText().toString().trim();
-                // if (u.getString(User._PASS).equals(md5(_pass)))
-                //     user.setPass(u.getString(User._PASS));
-            }
-            JSONArray messages = obj.getJSONArray("reward");
-            if (messages != null)
-                for (int y = 0; y < messages.length(); y++) {
-                    JSONObject message = messages.optJSONObject(y);
-                    if (message != null){}
-                    // rewards.details_on_play(message.getInt(User._COINS),
-                    //       message.getString(Rewards._MESSAGE));
+                Toast.makeText(this, "Ok", Toast.LENGTH_LONG).show();
+                if(first)
+                {
+                    Intent intent = new Intent(this, List.class);
+                    startActivity(intent);
                 }
-            // rewards.save(getActivity());
-        } catch (JSONException e) {
-            try {
-                new JSONObject(result);
-            } catch (JSONException ee) {
-                //  Toast.makeText(this, getString(R.string.network_err), Toast.LENGTH_SHORT).show();
+                finish();
             }
-        }
+        } catch (JSONException e) { }
     }
 
 }

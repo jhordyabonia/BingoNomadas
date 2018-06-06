@@ -243,17 +243,16 @@
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <TextView
+                    android:id="@+id/tuto"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:textSize="35dp"
+                    android:background="@drawable/tuto"
                     android:gravity="center"
-                    android:padding="3dp"
-                    android:shadowColor="#000000"
-                    android:shadowRadius="5"
-                    android:shadowDx="1"
-                    android:shadowDy="3"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:padding="9dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="35dp" />
 
                 <TextView
                     android:id="@+id/TextView01"
@@ -474,15 +473,15 @@
         android:background="@drawable/number_marked"
         android:paddingLeft="15sp"
         android:paddingRight="15sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="3"
+        android:shadowRadius="5"
         android:text="Bingo"
         android:textColor="@android:color/white"
         android:textSize="34sp"
         android:textStyle="normal|bold|italic"
-        android:typeface="serif"
-        android:shadowColor="#000000"
-        android:shadowRadius="5"
-        android:shadowDx="1"
-        android:shadowDy="3" />
+        android:typeface="serif" />
 
     <TextView
         android:id="@+id/last"

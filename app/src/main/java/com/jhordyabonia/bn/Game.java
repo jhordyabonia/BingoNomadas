@@ -47,8 +47,6 @@ public class Game extends FragmentActivity
 	ImageView bMusic,bAudio,bRestart;
 	MediaPlayer mAudio,mMusic,mWin,mLose,mLine;
 	MakeDialog add;
-	public static int TIMMER=5000;
-	public static boolean LOCAL=true;
 	public static String ID="3158241412";
 	TextToSpeech speaker;
     ViewPager mViewPager;
@@ -164,8 +162,6 @@ public class Game extends FragmentActivity
         if(intent==null)
 		{	finish();return;}
         ID=intent.getStringExtra(Server.ID);
-		TIMMER = intent.getIntExtra(Server._TIMMER,5000);
-		//LOCAL = intent.getBooleanExtra(Server._LOCAL,true);
        }
     @Override
     protected void onDestroy()
@@ -264,7 +260,7 @@ public class Game extends FragmentActivity
 				Server.setDataToSend(datos);
 				Server.send("winners", null, this);
 			}
-		};
+		}
 
 	public static int ID_NUMBERS[]=
 		{
