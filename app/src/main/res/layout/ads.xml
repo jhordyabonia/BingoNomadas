@@ -27,7 +27,7 @@
         android:shadowDx="1"
         android:shadowDy="2"
         android:shadowRadius="5"
-        android:text="@string/msj_mindbreak"
+        android:text="@string/tosingup"
         android:textColor="#000"
         android:textSize="20sp"
         android:textColorHint="#fff" />

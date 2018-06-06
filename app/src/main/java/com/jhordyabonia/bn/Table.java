@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -21,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,11 +42,12 @@ import org.json.JSONObject;
 
 public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 {
+	public static boolean WINNER=false;
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	ArrayList<Integer> already= new ArrayList<Integer>();
 	TextView number_now,last;
 	private AdView mAdView;
-	NoWin noWin= new NoWin();
+	Popup noWin= new Popup(),Win=new Popup();
 	ArrayList<Integer> table_values;
 	View root;
 	Game GAME;
@@ -62,12 +66,17 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		number_now=((TextView)root.findViewById(R.id.number_now));
 		last=((TextView)root.findViewById(R.id.last));
 
+
 		Messenger messenger= new Messenger(new Connect.MHandler(this));
 		Intent intent = new Intent(GAME,Connect.class);
 		intent.putExtra(Connect.MESSENGER, messenger);
 		GAME.startService(intent);
 
 		((AnimationDrawable)root.findViewById(R.id.tuto).getBackground()).start();
+
+		Bundle args= new Bundle();
+		args.putString(Store.PAY_INFO,"El organizador se contactará con los ganadores en un plazo no mayor, a 24 Horas. Para más información, revisa los datos de contacto.");
+		Win.setArguments(args);
 
 		makeTable();
 		mAdView = (AdView)root.findViewById(R.id.adView);
@@ -102,18 +111,19 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 	@Override
 	public void onClick(View arg0)
 	{
-		try
-		{
-			TextView number=(TextView)arg0;
-			int m=Integer.valueOf(number.getText().toString());
-			for(int t:already)
-				if(t==m)
-				{
-					number.setBackgroundResource(R.drawable.number_marked);
-					number.setTextColor(Color.WHITE);
-					break;
-				}
-		}catch(NumberFormatException e){}
+		if(!WINNER) {
+			try {
+				TextView number = (TextView) arg0;
+				int m = Integer.valueOf(number.getText().toString());
+				for (int t : already)
+					if (t == m)
+				    {
+						number.setBackgroundResource(R.drawable.number_marked);
+						number.setTextColor(Color.WHITE);
+						break;
+					}
+			} catch (NumberFormatException e) {}
+		}else Win.show(GAME.getSupportFragmentManager(),"missiles");
 	}
 	@Override
 	public void add_msj(int number)
@@ -127,7 +137,10 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		if(Game.AUDIO)
 		{
 			if(now.equals("00"))
+			{
 				now="Ha terminado";
+				GAME.stopService(new Intent(GAME,Connect.class));
+			}
 			GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
 		}
 	}
@@ -138,15 +151,24 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		super.onDestroy();
 	}
 
-	public static class NoWin extends DialogFragment
+	public static class Popup extends DialogFragment
 	{
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState)
-		{
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder =
 					new AlertDialog.Builder(getContext());
+			String msj="Aun no has armado el Bingo";
+			Bundle arg=getArguments();
+			if(arg!=null) {
+				msj = "Felicidades!!!";
 
-			builder.setTitle("Aun no has armado el Bingo");
+				LayoutInflater inflater = getActivity().getLayoutInflater();
+				TextView text =(TextView)inflater.inflate(R.layout.base, null);
+				text.setText(arg.getString(Store.PAY_INFO));
+				text.setTextColor(Color.BLACK);
+				text.setBackgroundColor(Color.WHITE);
+				builder.setView(text);
+			}builder.setTitle(msj);
 			return builder.create();
 		}
 	};
@@ -168,10 +190,30 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 	}
     private void showWin()
 	{
-			root.findViewById(R.id.win).setVisibility(View.VISIBLE);
-			AnimationDrawable anim =(AnimationDrawable)
-							root.findViewById(R.id.win).getBackground();
-			anim.start();
+		root.findViewById(R.id.win).setOnClickListener(this);
+		AnimationDrawable anim =(AnimationDrawable)
+						root.findViewById(R.id.win).getBackground();
+		ObjectAnimator animator= ObjectAnimator.ofFloat(
+			root.findViewById(R.id.table),"alpha",1f,0f);
+		animator.setInterpolator(new LinearInterpolator());
+		animator.setDuration(anim.getDuration(0)*5);
+		animator.addListener(new Animator.AnimatorListener() {
+			@Override public void onAnimationStart(Animator animator) {}
+			@Override public void onAnimationCancel(Animator animator) {}
+			@Override public void onAnimationRepeat(Animator animator) {}
+			@Override
+			public void onAnimationEnd(Animator animator) {
+				root.findViewById(R.id.last).setVisibility(View.GONE);
+				root.findViewById(R.id.bingo).setVisibility(View.GONE);
+				GAME.findViewById(R.id.commads).setVisibility(View.GONE);
+				root.findViewById(R.id.win).setVisibility(View.VISIBLE);
+				GAME.findViewById(R.id.pager).setBackgroundColor(Color.BLACK);
+			}
+
+		});
+		animator.start();
+		anim.start();
+		WINNER=true;
 	}
 	private void win()
 	{
@@ -183,9 +225,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 			{
 				HashMap<String, String> datos=new HashMap<String, String>();
 				datos.put(Server.ID,Game.ID);
-				//datos.put(User._NAME, GAME.user.name());
 				datos.put(Server.CELLULAR, GAME.user.cel());
-				///datos.put(User._EMAIL, GAME.user.email());
 				datos.put(Game.TABLES, toJSONObject(table_values).toString());
 				Server.setDataToSend(datos);
 				Server.send("win", GAME,new Asynchtask()
@@ -197,6 +237,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 								showWin();
 							}catch(NumberFormatException e){}
 						Toast.makeText(GAME,result,Toast.LENGTH_SHORT).show();
+						GAME.stopService(new Intent(GAME,Connect.class));
 					}
 				});
 				return;

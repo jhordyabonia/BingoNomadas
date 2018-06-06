@@ -1,5 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_1">
@@ -11,7 +12,7 @@
         tools:context=".Game"></android.support.v4.view.ViewPager>
 
     <TableRow
-        android:id="@+id/tableRow1"
+        android:id="@+id/commads"
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_gravity="left"

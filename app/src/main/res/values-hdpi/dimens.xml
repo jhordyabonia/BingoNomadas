@@ -3,17 +3,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="number_now_size">20dp</dimen>
     <dimen name="row_padding">5dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="spacing_last_winners">75dp</dimen>
     <dimen name="spacing_button">5dp</dimen>
     <dimen name="size_text_button">35sp</dimen>
     <dimen name="size_text_number_now">50dp</dimen>
-    <dimen name="size_text_bingo">34sp</dimen>
-    <dimen name="size_text_last_number">26sp</dimen>
-    <dimen name="padding_right_bingo">15sp</dimen>
-    <dimen name="t">3dp</dimen>
-    <dimen name="size_title_activity_list">40dp</dimen>
+    <dimen name="size_text_bingo">24sp</dimen>
+    <dimen name="size_text_last_number">16sp</dimen>
+    <dimen name="padding_right_bingo">10sp</dimen>
+    <dimen name="size_title_activity_list">35dp</dimen>
 
 </resources>
