@@ -69,7 +69,15 @@ public class List extends FragmentActivity implements View.OnClickListener,
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         user=new User(this);
+
+        if (user.cel().isEmpty()) {
+            Intent intent = new Intent(this, UserActivity.class);
+            startActivity(intent);
+            finish();
+            return;
         }
+        pull();
+       }
 
         private void setupSearchView() {
             mSearchView.setIconifiedByDefault(false);
@@ -90,18 +98,7 @@ public class List extends FragmentActivity implements View.OnClickListener,
         public boolean onQueryTextSubmit(String query) {
             return false;
         }
-        @Override
-        public void onResume()
-        {
-            super.onResume();
-            if (user.cel().isEmpty()) {
-                Intent intent = new Intent(this, UserActivity.class);
-                startActivity(intent);
-                finish();
-                return;
-            }
-            pull();
-        }
+
         private void pull()
         {
             Server.setDataToSend(new HashMap<String, String>());

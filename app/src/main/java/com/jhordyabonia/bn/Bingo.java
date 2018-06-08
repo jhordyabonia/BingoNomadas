@@ -18,8 +18,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.jhordyabonia.models.Store;
 import com.jhordyabonia.util.Server;
 
@@ -37,6 +40,7 @@ public class Bingo extends FragmentActivity {
 	private Gallery collection;
 	private ViewPager galery;
 	private AdView mAdView;
+	private InterstitialAd interstitialAd;
 	private JSONObject bingo;
 	String id="";
 	public static boolean LOCAL;
@@ -77,11 +81,46 @@ public class Bingo extends FragmentActivity {
 					collection.addItem(image);
 		}catch(JSONException e){}
 
+		// Initialize the Mobile Ads SDK.
+		//MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
+		//test
+		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 		mAdView = (AdView)findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
+
+		// Create the InterstitialAd and set the adUnitId.
+		interstitialAd = new InterstitialAd(this);
+
+		//interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+		//test
+		interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+		interstitialAd.setAdListener(new AdListener() {
+			@Override
+			public void onAdClosed(){startGame();}
+			@Override
+			public void onAdLoaded(){}
+			@Override
+			public void onAdFailedToLoad(int errorCode)
+			{ loadInterstitial();}
+		});
+		loadInterstitial();
 	}
 	public void launchGame(){
+		if(LOCAL)
+			interstitialAd.show();
+		else startGame();
+	}
+	private void loadInterstitial()
+	{
+		// Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
+		if (!interstitialAd.isLoading()/* && !interstitialAd.isLoaded()*/){
+			AdRequest.Builder builder = new AdRequest.Builder();
+			builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+			interstitialAd.loadAd(builder.build());
+		}
+	}
+	private void startGame() {
 		Intent intent = new Intent(Bingo.this, Game.class);
 		intent.putExtra(Server.BINGO,bingo.toString());
 		intent.putExtra(Server.ID,id);

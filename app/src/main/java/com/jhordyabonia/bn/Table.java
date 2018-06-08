@@ -223,6 +223,13 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				k+=get(WIN[y][t])?1:0;
 			if(k==4)
 			{
+				if(Bingo.LOCAL)
+				{
+					showWin();
+					GAME.stopService(new Intent(GAME,Connect.class));
+					return;
+				}
+
 				HashMap<String, String> datos=new HashMap<String, String>();
 				datos.put(Server.ID,Game.ID);
 				datos.put(Server.CELLULAR, GAME.user.cel());
@@ -235,7 +242,8 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 						try{
 								Integer.valueOf(result);
 								showWin();
-							}catch(NumberFormatException e){}
+							}catch(NumberFormatException e)
+						{Toast.makeText(GAME,"Número máximo de ganadores superado o no tienes conexión a internet.",Toast.LENGTH_SHORT).show();}
 						Toast.makeText(GAME,result,Toast.LENGTH_SHORT).show();
 						GAME.stopService(new Intent(GAME,Connect.class));
 					}
