@@ -57,15 +57,15 @@ public class List extends FragmentActivity implements View.OnClickListener,
         findViewById(R.id.settings).setOnClickListener(this);
 
         base = new Adapter(this,new ArrayList<Adapter.Item>());
-        view =(ListView)findViewById(R.id.tables);
-        mSearchView = (SearchView) findViewById(R.id.search);
+        view =findViewById(R.id.tables);
+        mSearchView =  findViewById(R.id.search);
         view.setAdapter(base);
         view.setDividerHeight(0);
         view.setTextFilterEnabled(true);
         view.setOnItemClickListener(this);
         setupSearchView();
 
-        mAdView = (AdView)findViewById(R.id.adView);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         user=new User(this);
@@ -140,7 +140,9 @@ public class List extends FragmentActivity implements View.OnClickListener,
 
                    int Mtimmer = store_raw.getJSONObject(arg2).getInt(Server._TIMMER);
                    boolean local = store_raw.getJSONObject(arg2).getInt(Server._LOCAL)!=0;
+                   boolean lotto = store_raw.getJSONObject(arg2).getInt(Server._LOTTO)!=0;
                    intent.putExtra(Server._LOCAL, local);
+                   intent.putExtra(Server._LOTTO, lotto);
                    intent.putExtra(Server._TIMMER, Mtimmer);
 
                    intent.putExtra(Server.ID, id);

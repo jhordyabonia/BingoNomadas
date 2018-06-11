@@ -28,7 +28,7 @@
             android:shadowDx="1"
             android:shadowDy="3"
             android:shadowRadius="5"
-            android:text="##"
+            android:text="__"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="@dimen/size_text_number_now" />
 
@@ -39,6 +39,90 @@
             android:layout_weight="1"
             android:background="@drawable/bg"
             android:padding="5dp">
+
+            <TableRow
+                android:id="@+id/lotto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/TextView26"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
+                    android:shadowRadius="5"
+                    android:text="B"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/TextView27"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
+                    android:shadowRadius="5"
+                    android:text="I"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/TextView28"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
+                    android:shadowRadius="5"
+                    android:text="N"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/TextView29"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
+                    android:shadowRadius="5"
+                    android:text="G"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/TextView30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1"
+                    android:shadowDy="3"
+                    android:shadowRadius="5"
+                    android:text="O"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="15dp" />
+            </TableRow>
+
 
             <TableRow
                 android:id="@+id/TableRow02"
@@ -459,6 +543,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             ads:adSize="BANNER"
@@ -495,7 +580,7 @@
         android:shadowDx="1"
         android:shadowDy="3"
         android:shadowRadius="5"
-        android:text="## ## ## ##"
+        android:text="__ __ __ __"
         android:textColor="#c6c6c6"
         android:textSize="@dimen/size_text_last_number"
         android:typeface="serif" />

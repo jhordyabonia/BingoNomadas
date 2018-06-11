@@ -43,7 +43,7 @@ public class Bingo extends FragmentActivity {
 	private InterstitialAd interstitialAd;
 	private JSONObject bingo;
 	String id="";
-	public static boolean LOCAL;
+	public static boolean LOCAL=true,LOTTO=true;
 	public static int TIMMER;
 
 	@Override
@@ -58,7 +58,7 @@ public class Bingo extends FragmentActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.activity_bingo);
 
-		galery = ((ViewPager) findViewById(R.id.pager));
+		galery =  findViewById(R.id.pager);
 		collection = new Gallery(getSupportFragmentManager());
 		galery.setAdapter(collection);
 
@@ -72,6 +72,7 @@ public class Bingo extends FragmentActivity {
 			id = intent.getStringExtra(Server.ID);
 			TIMMER = intent.getIntExtra(Server._TIMMER,5000);
 			LOCAL = intent.getBooleanExtra(Server._LOCAL,true);
+			LOTTO= intent.getBooleanExtra(Server._LOTTO,true);
 			((TextView)findViewById(R.id.bingo_name))
 					.setText(bingo.getString(Store.BINGO_NAME));
 
@@ -82,19 +83,19 @@ public class Bingo extends FragmentActivity {
 		}catch(JSONException e){}
 
 		// Initialize the Mobile Ads SDK.
-		//MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
+		MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
 		//test
-		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
-		mAdView = (AdView)findViewById(R.id.adView);
+		//MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+		mAdView = findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
 
 		// Create the InterstitialAd and set the adUnitId.
 		interstitialAd = new InterstitialAd(this);
 
-		//interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+		interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
 		//test
-		interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+		//interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 		interstitialAd.setAdListener(new AdListener() {
 			@Override
 			public void onAdClosed(){startGame();}
@@ -106,6 +107,12 @@ public class Bingo extends FragmentActivity {
 		});
 		loadInterstitial();
 	}
+	@Override
+	public void onDestroy()
+	{
+		stopService(new Intent(this,Connect.class));
+		super.onDestroy();
+	}
 	public void launchGame(){
 		if(LOCAL)
 			interstitialAd.show();
@@ -116,7 +123,7 @@ public class Bingo extends FragmentActivity {
 		// Request a new ad if one isn't already loaded, hide the button, and kick off the timer.
 		if (!interstitialAd.isLoading()/* && !interstitialAd.isLoaded()*/){
 			AdRequest.Builder builder = new AdRequest.Builder();
-			builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+			//builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
 			interstitialAd.loadAd(builder.build());
 		}
 	}

@@ -109,11 +109,11 @@ public class Game extends FragmentActivity
         	    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_game);
         
-        bRestart=(ImageView)findViewById(R.id.restart); 
+        bRestart=findViewById(R.id.restart);
         bRestart.setOnClickListener(controlers);
-        bMusic=(ImageView)findViewById(R.id.music);
+        bMusic=findViewById(R.id.music);
         bMusic.setOnClickListener(controlers);
-        bAudio=(ImageView)findViewById(R.id.audio);
+        bAudio=findViewById(R.id.audio);
         bAudio.setOnClickListener(controlers);
 
         file =  getSharedPreferences(GAME, Context.MODE_PRIVATE);
@@ -140,7 +140,7 @@ public class Game extends FragmentActivity
 					public void onInit(int arg0) {}
 				});
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager =  findViewById(R.id.pager);
         mViewPager.setAdapter(
         	new  FragmentPagerAdapter(getSupportFragmentManager()) 
         	{
@@ -166,8 +166,8 @@ public class Game extends FragmentActivity
     @Override
     protected void onDestroy()
     {
+		stopAudio();
     	super.onDestroy();
-    	stopAudio();
 	}@Override
     protected void onPause()
     {
@@ -209,7 +209,7 @@ public class Game extends FragmentActivity
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 
 				root=inflater.inflate(R.layout.details_on_play, null);
-				ListView view =(ListView)root.findViewById(R.id.details);
+				ListView view =root.findViewById(R.id.details);
 
 				base = new Adapter(getContext(),new ArrayList<Adapter.Item>(),R.layout.item2);
 				view.setAdapter(base);

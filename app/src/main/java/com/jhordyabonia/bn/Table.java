@@ -63,9 +63,11 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 
 		root= inflater.inflate(R.layout.table, container, false);
 		root.findViewById(R.id.bingo).setOnClickListener(controlers);
-		number_now=((TextView)root.findViewById(R.id.number_now));
-		last=((TextView)root.findViewById(R.id.last));
+		number_now=root.findViewById(R.id.number_now);
+		last=root.findViewById(R.id.last);
 
+		if(Bingo.LOTTO)
+			root.findViewById(R.id.lotto).setVisibility(View.INVISIBLE);
 
 		Messenger messenger= new Messenger(new Connect.MHandler(this));
 		Intent intent = new Intent(GAME,Connect.class);
@@ -78,16 +80,19 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		args.putString(Store.PAY_INFO,"El organizador se contactará con los ganadores en un plazo no mayor, a 24 Horas. Para más información, revisa los datos de contacto.");
 		Win.setArguments(args);
 
-		makeTable();
-		mAdView = (AdView)root.findViewById(R.id.adView);
+		if(Bingo.LOTTO)
+			lotto();
+		else bingo();
+
+		mAdView = root.findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
 		return root;
 	}
-	private ArrayList<Integer>  makeTable()
+	private ArrayList<Integer>  lotto()
 	{
 		int count=75;
-		table_values= new ArrayList<Integer>();
+		table_values= new ArrayList<>();
 		Random r=new Random();
 		int n=(r.nextInt(count)+1),c=0;
 		do
@@ -100,7 +105,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		int m=0;
 		for(int t:Game.ID_NUMBERS)
 		{
-			TextView v=(TextView)root.findViewById(t);
+			TextView v=root.findViewById(t);
 			v.setOnClickListener(this);
 			String nn="0"+table_values.get(m++);
 			String now=nn.substring(nn.length()-2,nn.length());
@@ -108,6 +113,34 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		}
 		return table_values;
 	}
+
+	private ArrayList<Integer>  bingo()
+	{
+		int n=0,seg,index[]={13,14,1,15,16};
+		table_values= new ArrayList<>();
+		Random r=new Random();
+		seg=(r.nextInt(3)*25)+1;
+		ArrayList<Integer> already= new ArrayList<>();
+		for(int x=0;x<index.length;x++)
+		{
+			for(int id_number:WIN[index[x]]) {
+				int y;
+				do y=r.nextInt(WIN[index[x]].length);
+				while (already.indexOf(y) != -1) ;
+				already.add(y);
+				n=seg+(x*5)+y;
+				TextView v=root.findViewById(id_number);
+				v.setOnClickListener(this);
+				String nn="0"+n;
+				String now=nn.substring(nn.length()-2,nn.length());
+				v.setText(now);
+			}
+			already.clear();
+			table_values.add(n);
+		}
+		return table_values;
+	}
+
 	@Override
 	public void onClick(View arg0)
 	{
@@ -140,7 +173,8 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 			{
 				now="Ha terminado";
 				GAME.stopService(new Intent(GAME,Connect.class));
-			}
+			}else if(!Bingo.LOTTO)
+				now=letter(now)+now;
 			GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
 		}
 	}
@@ -150,7 +184,36 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		GAME.stopService(new Intent(GAME,Connect.class));
 		super.onDestroy();
 	}
+	private char  letter(String number)
+	{
+		int pos=0;
+		for(int t=0;t<Game.ID_NUMBERS.length;t++) {
+			TextView v =  root.findViewById(Game.ID_NUMBERS[t]);
+			if (v.getText().toString().equals(number)) {
+				pos=Game.ID_NUMBERS[t];
+				break;
+			}
+		}
 
+		char out;
+		switch(pos)
+		{
+			case R.id.TextView02: case R.id.TextView11: case R.id.TextView04: case R.id.TextView22: case R.id.TextView15:
+				out='B';break;
+			case R.id.TextView16: case R.id.TextView07: case R.id.TextView17: case R.id.TextView10: case R.id.TextView19:
+				out='I';break;
+            case R.id.TextView18: case R.id.TextView08: case R.id.TextView03: case R.id.TextView14:
+                out='N';break;
+			case R.id.TextView13: case R.id.TextView12: case R.id.TextView01: case R.id.TextView21: case R.id.TextView09:
+				out='G';break;
+			case R.id.TextView06: case R.id.TextView20: case R.id.TextView05: case R.id.TextView25: case R.id.TextView24:
+				out='O';break;
+			default:
+				out="BINGO".charAt((new Random()).nextInt(4));
+		}
+
+		return out;
+	}
 	public static class Popup extends DialogFragment
 	{
 		@Override
@@ -221,12 +284,12 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 			int k = 0;
 			for (int t = 0; t < WIN[y].length; t++)
 				k+=get(WIN[y][t])?1:0;
-			if(k==4)
+			if(k==WIN[y].length)
 			{
 				if(Bingo.LOCAL)
 				{
 					showWin();
-					GAME.stopService(new Intent(GAME,Connect.class));
+					add_msj(0);
 					return;
 				}
 
@@ -256,10 +319,22 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 
 	int[][] WIN=
 		{
-			{R.id.TextView15,R.id.TextView02,R.id.TextView24,R.id.TextView06},
-			{R.id.TextView04,R.id.TextView17,R.id.TextView01,R.id.TextView05},
-			{R.id.TextView18,R.id.TextView08,R.id.TextView03,R.id.TextView14},
-			{R.id.TextView10,R.id.TextView02,R.id.TextView21,R.id.TextView06},
-			{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15}
+			/*0*/{R.id.TextView15,R.id.TextView02,R.id.TextView24,R.id.TextView06},
+			/*1*/{R.id.TextView04,R.id.TextView17,R.id.TextView01,R.id.TextView05},//3
+			/*2*/{R.id.TextView18,R.id.TextView08,R.id.TextView03,R.id.TextView14},//N
+			/*3*/{R.id.TextView10,R.id.TextView02,R.id.TextView21,R.id.TextView06},
+			/*4*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
+			/*5*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
+			/*6*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
+			/*7*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
+			/*8*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
+			/*9*/{R.id.TextView02 ,R.id.TextView11 ,R.id.TextView04 ,R.id.TextView22 ,R.id.TextView15},//B
+			/*10*/{R.id.TextView16 ,R.id.TextView07 ,R.id.TextView17 ,R.id.TextView10 ,R.id.TextView19},//I
+			/*11*/{R.id.TextView13 ,R.id.TextView12 ,R.id.TextView01 ,R.id.TextView21 ,R.id.TextView09},//G
+			/*12*/{R.id.TextView06 ,R.id.TextView20 ,R.id.TextView05 ,R.id.TextView25 ,R.id.TextView24},//O
+			/*13*/{R.id.TextView24 ,R.id.TextView13 ,R.id.TextView14 ,R.id.TextView19 ,R.id.TextView02},//1
+			/*14*/{R.id.TextView11 ,R.id.TextView10 ,R.id.TextView03 ,R.id.TextView12 ,R.id.TextView25},//2
+			/*15*/{R.id.TextView20 ,R.id.TextView21 ,R.id.TextView18 ,R.id.TextView07 ,R.id.TextView22},//4
+			/*16*/{R.id.TextView15 ,R.id.TextView16 ,R.id.TextView08 ,R.id.TextView09 ,R.id.TextView06} //5
 		};
 }

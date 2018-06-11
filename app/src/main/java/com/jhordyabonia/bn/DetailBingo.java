@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jhordyabonia.models.Store;
 import com.jhordyabonia.models.User;
@@ -49,7 +48,7 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
             BINGO.launchGame();
         else if (tables.contains(user.cel()))
             BINGO.launchGame();
-        else    noTable.show(BINGO.getSupportFragmentManager(),"missiles");
+        else  noTable.show(BINGO.getSupportFragmentManager(),"missiles");
     }
     public static class NoTable extends DialogFragment
     {
@@ -63,7 +62,7 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
             builder.setTitle(args.getString(Store.PAY_INFO));
             return builder.create();
         }
-    };
+    }
     private void load() throws JSONException {
 
         ((TextView)root.findViewById(R.id.bingo_date))
@@ -75,11 +74,12 @@ public class DetailBingo extends Fragment implements View.OnClickListener{
 
         if(BINGO.LOCAL)
             ((TextView)root.findViewById(R.id.launch))
-                 .setText("Jugar");
-        else  if(store.getString(Game.TABLES).contains(user.cel()))
+                    .setText("Jugar");
+        else if(store.getString(Game.TABLES).contains(user.cel()))
             ((TextView)root.findViewById(R.id.launch))
                     .setText("Jugar");
-        else ((TextView)root.findViewById(R.id.launch))
+        else
+            ((TextView)root.findViewById(R.id.launch))
                  .setText("Comprar Tabla");
 
         ((TextView)root.findViewById(R.id.author_name))
