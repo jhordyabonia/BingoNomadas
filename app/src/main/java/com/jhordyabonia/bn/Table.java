@@ -42,7 +42,7 @@ import org.json.JSONObject;
 
 public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 {
-	public static boolean WINNER=false;
+	public static boolean WINNER=false,ON_TABLE=false;
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	ArrayList<Integer> already= new ArrayList<Integer>();
 	TextView number_now,last;
@@ -89,6 +89,18 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		mAdView.loadAd(adRequest);
 		return root;
 	}
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        ON_TABLE=false;
+    }
+    @Override
+    public void onPause()
+    {
+        ON_TABLE=false;
+        super.onPause();
+    }
 	private ArrayList<Integer>  lotto()
 	{
 		int count=75;
@@ -175,7 +187,8 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				GAME.stopService(new Intent(GAME,Connect.class));
 			}else if(!Bingo.LOTTO)
 				now=letter(now)+now;
-			GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
+			if(ON_TABLE)
+			    GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
 		}
 	}
 	@Override

@@ -30,7 +30,7 @@ import com.jhordyabonia.webservice.Asynchtask;
 		protected boolean STOP=false;
     	public interface Inbox
     	{
-    		public void add_msj(int number) throws JSONException;
+    		 void add_msj(int number) throws JSONException;
     	} 
     	public static class MHandler extends Handler 
     	{

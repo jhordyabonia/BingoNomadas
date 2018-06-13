@@ -9,7 +9,7 @@
     <dimen name="spacing_last_winners">75dp</dimen>
     <dimen name="spacing_button">5dp</dimen>
     <dimen name="size_text_button">35sp</dimen>
-    <dimen name="size_text_number_now">50dp</dimen>
+    <dimen name="size_text_number_now">50sp</dimen>
     <dimen name="size_text_bingo">34sp</dimen>
     <dimen name="size_text_last_number">26sp</dimen>
     <dimen name="padding_right_bingo">15sp</dimen>

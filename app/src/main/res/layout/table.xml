@@ -60,7 +60,8 @@
                     android:shadowRadius="5"
                     android:text="B"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="15dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/TextView27"
@@ -75,7 +76,8 @@
                     android:shadowRadius="5"
                     android:text="I"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="15dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/TextView28"
@@ -90,7 +92,8 @@
                     android:shadowRadius="5"
                     android:text="N"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="15dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/TextView29"
@@ -105,7 +108,8 @@
                     android:shadowRadius="5"
                     android:text="G"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="15dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/TextView30"
@@ -120,7 +124,8 @@
                     android:shadowRadius="5"
                     android:text="O"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="15dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="15sp" />
             </TableRow>
 
 
@@ -144,7 +149,8 @@
                     android:shadowRadius="5"
                     android:text="01"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView19"
@@ -159,7 +165,8 @@
                     android:shadowRadius="5"
                     android:text="02"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView14"
@@ -174,7 +181,8 @@
                     android:shadowRadius="5"
                     android:text="03"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView13"
@@ -189,7 +197,8 @@
                     android:shadowRadius="5"
                     android:text="04"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView24"
@@ -204,7 +213,8 @@
                     android:shadowRadius="5"
                     android:text="05"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
             </TableRow>
 
             <TableRow
@@ -227,7 +237,8 @@
                     android:shadowRadius="5"
                     android:text="01"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView10"
@@ -242,7 +253,8 @@
                     android:shadowRadius="5"
                     android:text="02"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView03"
@@ -257,7 +269,8 @@
                     android:shadowRadius="5"
                     android:text="03"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView12"
@@ -272,7 +285,8 @@
                     android:shadowRadius="5"
                     android:text="04"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView25"
@@ -287,7 +301,8 @@
                     android:shadowRadius="5"
                     android:text="05"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
             </TableRow>
 
             <TableRow
@@ -310,7 +325,8 @@
                     android:shadowRadius="5"
                     android:text="01"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView17"
@@ -325,7 +341,8 @@
                     android:shadowRadius="5"
                     android:text="02"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/tuto"
@@ -337,7 +354,7 @@
                     android:gravity="center"
                     android:padding="9dp"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="25dp" />
+                    android:textSize="25sp" />
 
                 <TextView
                     android:id="@+id/TextView01"
@@ -352,7 +369,8 @@
                     android:shadowRadius="5"
                     android:text="04"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView05"
@@ -367,7 +385,8 @@
                     android:shadowRadius="5"
                     android:text="05"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
             </TableRow>
 
             <TableRow
@@ -390,7 +409,8 @@
                     android:shadowRadius="5"
                     android:text="01"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView07"
@@ -405,7 +425,8 @@
                     android:shadowRadius="5"
                     android:text="02"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView18"
@@ -420,7 +441,8 @@
                     android:shadowRadius="5"
                     android:text="03"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView21"
@@ -435,7 +457,8 @@
                     android:shadowRadius="5"
                     android:text="04"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView20"
@@ -450,7 +473,8 @@
                     android:shadowRadius="5"
                     android:text="05"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
             </TableRow>
 
             <TableRow
@@ -473,7 +497,8 @@
                     android:shadowRadius="5"
                     android:text="01"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView16"
@@ -488,7 +513,8 @@
                     android:shadowRadius="5"
                     android:text="02"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView08"
@@ -503,7 +529,8 @@
                     android:shadowRadius="5"
                     android:text="03"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView09"
@@ -518,7 +545,8 @@
                     android:shadowRadius="5"
                     android:text="04"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
 
                 <TextView
                     android:id="@+id/TextView06"
@@ -533,7 +561,8 @@
                     android:shadowRadius="5"
                     android:text="05"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="35dp" />
+                    android:textColor="@color/text_number_table"
+                    android:textSize="35sp" />
             </TableRow>
         </TableLayout>
 
@@ -541,8 +570,6 @@
             android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
@@ -554,7 +581,7 @@
         android:id="@+id/bingo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_marginTop="@dimen/padding_right_bingo"
         android:background="@drawable/number_marked"
         android:paddingLeft="@dimen/padding_right_bingo"
@@ -563,7 +590,7 @@
         android:shadowDx="1"
         android:shadowDy="3"
         android:shadowRadius="5"
-        android:text="Bingo"
+        android:text="@string/bingo_title_button"
         android:textColor="@android:color/white"
         android:textSize="@dimen/size_text_bingo"
         android:textStyle="normal|bold|italic"
@@ -593,5 +620,6 @@
         android:background="@drawable/win"
         android:scaleType="centerInside"
         android:src="@drawable/win_1"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:contentDescription="TODO" />
 </FrameLayout>
