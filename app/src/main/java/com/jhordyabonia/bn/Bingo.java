@@ -83,9 +83,9 @@ public class Bingo extends FragmentActivity {
 		}catch(JSONException e){}
 
 		// Initialize the Mobile Ads SDK.
-		MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
+		//MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
 		//test
-		//MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 		mAdView = findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
@@ -93,9 +93,9 @@ public class Bingo extends FragmentActivity {
 		// Create the InterstitialAd and set the adUnitId.
 		interstitialAd = new InterstitialAd(this);
 
-		interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+		//interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
 		//test
-		//interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+		interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 		interstitialAd.setAdListener(new AdListener() {
 			@Override
 			public void onAdClosed(){startGame();}
