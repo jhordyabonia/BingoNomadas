@@ -34,7 +34,7 @@ public class List extends FragmentActivity implements View.OnClickListener,
     ListView view;
     SearchView mSearchView;
     User user;
-    JSONArray store_raw;
+    JSONArray store_raw=null;
     private AdView mAdView;
 
     @Override
@@ -76,7 +76,6 @@ public class List extends FragmentActivity implements View.OnClickListener,
             finish();
             return;
         }
-        pull();
        }
 
         private void setupSearchView() {
@@ -98,11 +97,18 @@ public class List extends FragmentActivity implements View.OnClickListener,
         public boolean onQueryTextSubmit(String query) {
             return false;
         }
-
+        @Override
+        public void onResume()
+        {
+            super.onResume();
+            pull();
+        }
         private void pull()
         {
-            Server.setDataToSend(new HashMap<String, String>());
-            Server.send("bingos", null, this);
+            if(store_raw==null) {
+                Server.setDataToSend(new HashMap<String, String>());
+                Server.send("bingos", null, this);
+            }
         }
         @Override
         public void processFinish(String json)

@@ -20,14 +20,13 @@ import com.jhordyabonia.webservice.Asynchtask;
 
  public class Connect extends Service implements Asynchtask 
     {	
-		public  static final String MESSENGER = "messenger";
-		private  static final String MENSAJE_NUEVO = "mensaje_nuevo";
+		public  static final String MESSENGER = "messenger",ALREADY="already",MENSAJE_NUEVO = "mensaje_nuevo";
 		private Random ram=new Random();
 		private Messenger messenger;
 		private int count=75;
 		private  ArrayList<Integer> already= new ArrayList<Integer>();
     	User user;
-		protected boolean STOP=false;
+		public static boolean STOP=false;
     	public interface Inbox
     	{
     		 void add_msj(int number) throws JSONException;
@@ -55,10 +54,11 @@ import com.jhordyabonia.webservice.Asynchtask;
     	{
     		Bundle extras = intent.getExtras();
     		STOP=false;
-    		already.clear();
     		user=new User(this);
-    		if(extras !=null)
+    		if(extras !=null) {
 				messenger = (Messenger) extras.get(MESSENGER);
+				already= (ArrayList<Integer>) extras.get(ALREADY);
+			}
 			get();
     		return super.onStartCommand(intent, flags, startId);	
     	}	
@@ -68,10 +68,16 @@ import com.jhordyabonia.webservice.Asynchtask;
     		try
     		{
     			int t=Integer.valueOf(result);
-    			nuevos(t);	
+    			nuevos(t);
+    			if(t==0)
+    				STOP=true;
     		}catch(NumberFormatException e){}
     		if(!STOP)
     			get();
+    		else {
+    			this.stopSelf(0);
+				this.onDestroy();
+    		}
     	}
     	private void nuevos(int result) 
     	{

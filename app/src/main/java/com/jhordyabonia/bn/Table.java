@@ -44,6 +44,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 {
 	public static boolean WINNER=false,ON_TABLE=false;
 	public static final String ARG_SECTION_NUMBER = "section_number";
+	private static int COLOR=0;
 	ArrayList<Integer> already= new ArrayList<Integer>();
 	TextView number_now,last;
 	private AdView mAdView;
@@ -66,13 +67,6 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		number_now=root.findViewById(R.id.number_now);
 		last=root.findViewById(R.id.last);
 
-		if(Bingo.LOTTO)
-			root.findViewById(R.id.lotto).setVisibility(View.INVISIBLE);
-
-		Messenger messenger= new Messenger(new Connect.MHandler(this));
-		Intent intent = new Intent(GAME,Connect.class);
-		intent.putExtra(Connect.MESSENGER, messenger);
-		GAME.startService(intent);
 
 		((AnimationDrawable)root.findViewById(R.id.tuto).getBackground()).start();
 
@@ -80,25 +74,38 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		args.putString(Store.PAY_INFO,"El organizador se contactará con los ganadores en un plazo no mayor, a 24 Horas. Para más información, revisa los datos de contacto.");
 		Win.setArguments(args);
 
-		if(Bingo.LOTTO)
+		if(Bingo.LOTTO) {
+			root.findViewById(R.id.lotto).setVisibility(View.INVISIBLE);
 			lotto();
-		else bingo();
+		}else bingo();
 
 		mAdView = root.findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
+
+		ON_TABLE=true;
 		return root;
+	}
+	private void connect()
+	{
+		Messenger messenger= new Messenger(new Connect.MHandler(this));
+		Intent intent = new Intent(GAME,Connect.class);
+		intent.putExtra(Connect.MESSENGER, messenger);
+		intent.putExtra(Connect.ALREADY, already);
+		GAME.startService(intent);
 	}
     @Override
     public void onResume()
     {
         super.onResume();
-        ON_TABLE=false;
+		ON_TABLE=true;
+		connect();
     }
     @Override
     public void onPause()
     {
-        ON_TABLE=false;
+		GAME.stopService(new Intent(GAME,Connect.class));
+		ON_TABLE=false;
         super.onPause();
     }
 	private ArrayList<Integer>  lotto()
@@ -119,10 +126,11 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		{
 			TextView v=root.findViewById(t);
 			v.setOnClickListener(this);
-			String nn="0"+table_values.get(m++);
+			String nn="00"+table_values.get(m++);
 			String now=nn.substring(nn.length()-2,nn.length());
 			v.setText(now);
 		}
+		WINNER=false;
 		return table_values;
 	}
 
@@ -150,6 +158,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 			already.clear();
 			table_values.add(n);
 		}
+		WINNER=false;
 		return table_values;
 	}
 
@@ -157,17 +166,16 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 	public void onClick(View arg0)
 	{
 		if(!WINNER) {
-			try {
-				TextView number = (TextView) arg0;
-				int m = Integer.valueOf(number.getText().toString());
-				for (int t : already)
-					if (t == m)
-				    {
-						number.setBackgroundResource(R.drawable.number_marked);
-						number.setTextColor(Color.WHITE);
-						break;
-					}
-			} catch (NumberFormatException e) {}
+			TextView number = (TextView) arg0;
+			if(number.getBackground()==null)   {
+				number.setBackgroundResource(R.drawable.number_marked);
+				if(COLOR==0)
+					COLOR=number.getCurrentTextColor();
+				number.setTextColor(Color.WHITE);
+				}else{
+				arg0.setBackground(null);
+				number.setTextColor(COLOR);
+			}
 		}else Win.show(GAME.getSupportFragmentManager(),"missiles");
 	}
 	@Override
@@ -187,7 +195,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				GAME.stopService(new Intent(GAME,Connect.class));
 			}else if(!Bingo.LOTTO)
 				now=letter(now)+now;
-			if(ON_TABLE)
+			if(ON_TABLE)if(!WINNER)
 			    GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
 		}
 	}
@@ -195,6 +203,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 	public void onDestroy()
 	{
 		GAME.stopService(new Intent(GAME,Connect.class));
+		Connect.STOP=true;
 		super.onDestroy();
 	}
 	private char  letter(String number)
@@ -250,7 +259,12 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 	};
 	private boolean get(int id)
 	{
-		return root.findViewById(id).getBackground()!=null;
+		int val;
+		try{
+			TextView num=root.findViewById(id);
+			val=Integer.valueOf(num.getText().toString());
+		}catch (NumberFormatException e){return false;}
+		return already.contains(val);
 	}
 	private JSONObject toJSONObject(ArrayList t)
 	{
@@ -290,6 +304,8 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		animator.start();
 		anim.start();
 		WINNER=true;
+		Connect.STOP=true;
+		GAME.stopService(new Intent(GAME,Connect.class));
 	}
 	private void win()
 	{
@@ -299,6 +315,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				k+=get(WIN[y][t])?1:0;
 			if(k==WIN[y].length)
 			{
+				if(!Game.ID.trim().equals("3158241412"))
 				if(Bingo.LOCAL)
 				{
 					showWin();
@@ -321,7 +338,6 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 							}catch(NumberFormatException e)
 						{Toast.makeText(GAME,"Número máximo de ganadores superado o no tienes conexión a internet.",Toast.LENGTH_SHORT).show();}
 						Toast.makeText(GAME,result,Toast.LENGTH_SHORT).show();
-						GAME.stopService(new Intent(GAME,Connect.class));
 					}
 				});
 				return;
