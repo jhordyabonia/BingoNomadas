@@ -47,6 +47,7 @@ public class Game extends FragmentActivity
 	ImageView bMusic,bAudio,bRestart;
 	MediaPlayer mAudio,mMusic,mWin,mLose,mLine;
 	MakeDialog add;
+	public int LEVEL=0;
 	public static String ID="3158241412";
 	TextToSpeech speaker;
     ViewPager mViewPager;
@@ -161,7 +162,8 @@ public class Game extends FragmentActivity
         Intent intent =getIntent();
         if(intent==null)
 		{	finish();return;}
-        ID=intent.getStringExtra(Server.ID);
+		ID=intent.getStringExtra(Server.ID);
+		LEVEL=intent.getIntExtra(Server._LEVEL,0);
        }
     @Override
     protected void onDestroy()

@@ -156,11 +156,13 @@ public class List extends FragmentActivity implements View.OnClickListener,
                    String bingo = store_raw.getJSONObject(arg2).getString(Server.BINGO);
 
                    int Mtimmer = store_raw.getJSONObject(arg2).getInt(Server._TIMMER);
+                   int level = store_raw.getJSONObject(arg2).getInt(Server._LEVEL);
                    boolean local = store_raw.getJSONObject(arg2).getInt(Server._LOCAL)!=0;
                    boolean lotto = store_raw.getJSONObject(arg2).getInt(Server._LOTTO)!=0;
                    intent.putExtra(Server._LOCAL, local);
                    intent.putExtra(Server._LOTTO, lotto);
                    intent.putExtra(Server._TIMMER, Mtimmer);
+                   intent.putExtra(Server._LEVEL, level);
 
                    intent.putExtra(Server.ID, id);
                    intent.putExtra(Server.BINGO, bingo);

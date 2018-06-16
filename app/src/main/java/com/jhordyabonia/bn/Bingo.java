@@ -44,7 +44,7 @@ public class Bingo extends FragmentActivity {
 	private JSONObject bingo =new JSONObject();
 	String id="";
 	public static boolean LOCAL=true,LOTTO=true;
-	public static int TIMMER;
+	public static int TIMMER,LEVEL;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class Bingo extends FragmentActivity {
 			TIMMER = intent.getIntExtra(Server._TIMMER,5000);
 			LOCAL = intent.getBooleanExtra(Server._LOCAL,true);
 			LOTTO= intent.getBooleanExtra(Server._LOTTO,true);
+			LEVEL= intent.getIntExtra(Server._LEVEL,0);
 			((TextView)findViewById(R.id.bingo_name))
 					.setText(bingo.getString(Store.BINGO_NAME));
 
@@ -83,9 +84,9 @@ public class Bingo extends FragmentActivity {
 		}catch(JSONException e){}
 
 		// Initialize the Mobile Ads SDK.
-		//MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
+		MobileAds.initialize(this, "ca-app-pub-7036101536380541~6190945049");
 		//test
-		MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+		//MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
 		mAdView = findViewById(R.id.adView);
 		AdRequest adRequest = new AdRequest.Builder().build();
 		mAdView.loadAd(adRequest);
@@ -93,9 +94,9 @@ public class Bingo extends FragmentActivity {
 		// Create the InterstitialAd and set the adUnitId.
 		interstitialAd = new InterstitialAd(this);
 
-		//interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+		interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
 		//test
-		interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+		//interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 		interstitialAd.setAdListener(new AdListener() {
 			@Override
 			public void onAdClosed(){startGame();}
@@ -131,6 +132,7 @@ public class Bingo extends FragmentActivity {
 		Intent intent = new Intent(Bingo.this, Game.class);
 		intent.putExtra(Server.BINGO,bingo.toString());
 		intent.putExtra(Server.ID,id);
+		intent.putExtra(Server._LEVEL,LEVEL);
 		startActivity(intent);
 		finish();
 	}

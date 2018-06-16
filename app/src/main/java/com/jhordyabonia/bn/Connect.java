@@ -23,7 +23,7 @@ import com.jhordyabonia.webservice.Asynchtask;
 		public  static final String MESSENGER = "messenger",ALREADY="already",MENSAJE_NUEVO = "mensaje_nuevo";
 		private Random ram=new Random();
 		private Messenger messenger;
-		private int count=75,win=75;
+		private int count=75,win=0;
 		private  ArrayList<Integer> already= new ArrayList<Integer>();
     	User user;
 		public static boolean STOP=false;
@@ -56,12 +56,14 @@ import com.jhordyabonia.webservice.Asynchtask;
     		Bundle extras = intent.getExtras();
     		STOP=false;
     		user=new User(this);
+    		int level=0;
     		if(extras !=null) {
 				messenger = (Messenger) extras.get(MESSENGER);
 				already= (ArrayList<Integer>) extras.get(ALREADY);
+				level=  extras.getInt(Server._LEVEL);
 			}
 			Random r= new Random();
-    		win=15+r.nextInt(25);
+    		win=(level*5)+r.nextInt(25);
 			get();
     		return super.onStartCommand(intent, flags, startId);	
     	}	
@@ -72,7 +74,7 @@ import com.jhordyabonia.webservice.Asynchtask;
     		{
     			int t=Integer.valueOf(result);
     			nuevos(t);
-    			if(t==0)
+    			if(t<=0)
     				STOP=true;
     		}catch(NumberFormatException e){}
     		if(!STOP)
@@ -123,7 +125,7 @@ import com.jhordyabonia.webservice.Asynchtask;
 						else n=(ram.nextInt(count)+1);
 					already.add(n);
 					if(already.size()>win)
-						STOP=true;
+					{	STOP=true; n=-2;}
 					processFinish(""+n);
 					count=75;
 					}

@@ -61,7 +61,7 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
         user = new User(this);
 
         make();
-        mAdView = (AdView)findViewById(R.id.adView);
+        mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
@@ -77,7 +77,7 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
         findViewById(R.id.terminos).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://123seller.azurewebsites.net/bn/terminos/";
+                String url =Server.URL_SERVER+"terminos/";
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);

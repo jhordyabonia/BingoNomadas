@@ -92,6 +92,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		Intent intent = new Intent(GAME,Connect.class);
 		intent.putExtra(Connect.MESSENGER, messenger);
 		intent.putExtra(Connect.ALREADY, already);
+		intent.putExtra(Server._LEVEL, GAME.LEVEL);
 		GAME.startService(intent);
 	}
     @Override
@@ -176,27 +177,50 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				arg0.setBackground(null);
 				number.setTextColor(COLOR);
 			}
+			GAME.mAudio.start();
 		}else Win.show(GAME.getSupportFragmentManager(),"missiles");
+	}
+	public void commnds(int in)
+	{
+		String now="";
+		switch (in)
+		{
+			case -1:
+				now="¡Bingoo!";
+				break;
+			case -2:
+				now="PC ¡Bingoo!";
+				add_msj(0);
+				break;
+			default:
+				Toast.makeText(GAME,""+in,Toast.LENGTH_LONG).show();
+				break;
+		}
+		if (Game.AUDIO)
+			GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
 	}
 	@Override
 	public void add_msj(int number)
 	{
-		already.add(number);
-		String n="0"+number;
-		String now=n.substring(n.length()-2,n.length());;
-		String tmp=("12345678901"+last.getText()+" "+number_now.getText());
-		last.setText(tmp.substring(tmp.length()-11,tmp.length()));
-		number_now.setText(now);
-		if(Game.AUDIO)
-		{
-			if(now.equals("00"))
-			{
-				now="Ha terminado";
-				GAME.stopService(new Intent(GAME,Connect.class));
-			}else if(!Bingo.LOTTO)
-				now=letter(now)+now;
-			if(ON_TABLE)if(!WINNER)
-			    GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
+		if(0>number)
+			commnds(number);
+		else {
+			already.add(number);
+			String n = "0" + number;
+			String now = n.substring(n.length() - 2, n.length());
+			;
+			String tmp = ("12345678901" + last.getText() + " " + number_now.getText());
+			last.setText(tmp.substring(tmp.length() - 11, tmp.length()));
+			number_now.setText(now);
+			if (Game.AUDIO) {
+				if (now.equals("00")) {
+					now = "Ha terminado";
+					GAME.stopService(new Intent(GAME, Connect.class));
+				} else if (!Bingo.LOTTO)
+					now = letter(now) + now;
+				if (ON_TABLE) if (!WINNER)
+					GAME.speaker.speak(now, TextToSpeech.QUEUE_FLUSH, null);
+			}
 		}
 	}
 	@Override
