@@ -23,10 +23,11 @@ import com.jhordyabonia.webservice.Asynchtask;
 		public  static final String MESSENGER = "messenger",ALREADY="already",MENSAJE_NUEVO = "mensaje_nuevo";
 		private Random ram=new Random();
 		private Messenger messenger;
-		private int count=75;
+		private int count=75,win=75;
 		private  ArrayList<Integer> already= new ArrayList<Integer>();
     	User user;
 		public static boolean STOP=false;
+
     	public interface Inbox
     	{
     		 void add_msj(int number) throws JSONException;
@@ -59,6 +60,8 @@ import com.jhordyabonia.webservice.Asynchtask;
 				messenger = (Messenger) extras.get(MESSENGER);
 				already= (ArrayList<Integer>) extras.get(ALREADY);
 			}
+			Random r= new Random();
+    		win=15+r.nextInt(25);
 			get();
     		return super.onStartCommand(intent, flags, startId);	
     	}	
@@ -119,6 +122,8 @@ import com.jhordyabonia.webservice.Asynchtask;
 						if(c++>=count) {n=0;STOP=true;break;}
 						else n=(ram.nextInt(count)+1);
 					already.add(n);
+					if(already.size()>win)
+						STOP=true;
 					processFinish(""+n);
 					count=75;
 					}

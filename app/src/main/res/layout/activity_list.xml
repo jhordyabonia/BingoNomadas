@@ -69,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="-10dp"
-                android:gravity="left"></SearchView>
+                android:gravity="left"
+                android:focusedByDefault="false"></SearchView>
         </FrameLayout>
 
         <ListView
@@ -89,7 +90,8 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             ads:adSize="LARGE_BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:focusedByDefault="true"></com.google.android.gms.ads.AdView>
 
     </LinearLayout>
 </FrameLayout>

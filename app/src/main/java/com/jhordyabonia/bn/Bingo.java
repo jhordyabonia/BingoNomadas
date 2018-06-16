@@ -41,7 +41,7 @@ public class Bingo extends FragmentActivity {
 	private ViewPager galery;
 	private AdView mAdView;
 	private InterstitialAd interstitialAd;
-	private JSONObject bingo;
+	private JSONObject bingo =new JSONObject();
 	String id="";
 	public static boolean LOCAL=true,LOTTO=true;
 	public static int TIMMER;
@@ -93,7 +93,7 @@ public class Bingo extends FragmentActivity {
 		// Create the InterstitialAd and set the adUnitId.
 		interstitialAd = new InterstitialAd(this);
 
-		interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
+		//interstitialAd.setAdUnitId(getString(R.string.ad_unit_id));
 		//test
 		interstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
 		interstitialAd.setAdListener(new AdListener() {

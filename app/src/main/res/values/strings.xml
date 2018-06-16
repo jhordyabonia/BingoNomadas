@@ -11,6 +11,7 @@
     <string name="share">Comparte con tus amigos, y aumenta la diversión</string>
     <string name="singup">Singup first</string>
     <string name="ref">Ref</string>
+    <string name="terminos">Enviando este formulario, entendemos acepta nuestros <a href="http://123seller.azurewebsites.net/bn/terminos/" >Términos y condiciones.</a></string>
 
     <string name="reward">" Reward "</string>
     <string name="count"> Count / Coins </string>
@@ -20,7 +21,7 @@
     <string name="award">" Store "</string>
     <string name="play">" Play "</string>
     <string name="play_video">" See this video to awards $100 "</string>
-    <string name="save">" Save "</string>
+    <string name="save">" Enviar "</string>
     <string name="title_boards">Game\'s Boards</string>
     <string name="wall">Wall\'s Fame week</string>
     <string name="new_game">New game</string>

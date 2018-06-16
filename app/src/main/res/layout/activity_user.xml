@@ -131,6 +131,17 @@
             android:textStyle="bold|italic"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/terminos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:autoLink="web"
+            android:clickable="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:text="@string/terminos" />
+
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="match_parent"

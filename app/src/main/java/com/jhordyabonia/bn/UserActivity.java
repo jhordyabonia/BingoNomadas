@@ -2,6 +2,7 @@ package com.jhordyabonia.bn;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -66,13 +67,22 @@ public class UserActivity extends Activity implements View.OnClickListener,Async
     }
     private void make()
     {
-        name = (EditText) findViewById(R.id.name);
-        email = (EditText) findViewById(R.id.email);
-        cel = (EditText) findViewById(R.id.cel);
+        name =  findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        cel =  findViewById(R.id.cel);
         name.setText(user.name());
         email.setText(user.email());
         cel.setText(user.cel());
         findViewById(R.id.save).setOnClickListener(this);
+        findViewById(R.id.terminos).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "http://123seller.azurewebsites.net/bn/terminos/";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
     }
 
     @Override

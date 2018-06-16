@@ -136,7 +136,7 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 
 	private ArrayList<Integer>  bingo()
 	{
-		int n=0,seg,index[]={13,14,1,15,16};
+		int n=0,seg,index[]={9,10,1,11,12};
 		table_values= new ArrayList<>();
 		Random r=new Random();
 		seg=(r.nextInt(3)*25)+1;
@@ -253,6 +253,20 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				text.setTextColor(Color.BLACK);
 				text.setBackgroundColor(Color.WHITE);
 				builder.setView(text);
+				DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener()
+				{
+					@Override
+					public void onClick(DialogInterface dialog, int which)
+					{dialog.dismiss();}
+				};
+				DialogInterface.OnClickListener listener2 = new DialogInterface.OnClickListener()
+				{
+					@Override
+					public void onClick(DialogInterface dialog, int which)
+					{getActivity().finish();}
+				};
+				builder.setNegativeButton("Volver a Jugar", listener2)
+						.setPositiveButton(" Ok ", listener);
 			}builder.setTitle(msj);
 			return builder.create();
 		}
@@ -299,7 +313,6 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				root.findViewById(R.id.win).setVisibility(View.VISIBLE);
 				GAME.findViewById(R.id.pager).setBackgroundColor(Color.BLACK);
 			}
-
 		});
 		animator.start();
 		anim.start();
@@ -315,18 +328,13 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 				k+=get(WIN[y][t])?1:0;
 			if(k==WIN[y].length)
 			{
-				if(!Game.ID.trim().equals("3158241412"))
-				if(Bingo.LOCAL)
-				{
-					showWin();
-					add_msj(0);
-					return;
-				}
-
 				HashMap<String, String> datos=new HashMap<String, String>();
 				datos.put(Server.ID,Game.ID);
 				datos.put(Server.CELLULAR, GAME.user.cel());
-				datos.put(Game.TABLES, toJSONObject(table_values).toString());
+				if(!Bingo.LOCAL)
+					datos.put(Game.TABLES, toJSONObject(table_values).toString());
+				else add_msj(0);
+
 				Server.setDataToSend(datos);
 				Server.send("win", GAME,new Asynchtask()
 				{
@@ -345,7 +353,6 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 		}
 		noWin.show(GAME.getSupportFragmentManager(),"missiles");
 	}
-
 	int[][] WIN=
 		{
 			/*0*/{R.id.TextView15,R.id.TextView02,R.id.TextView24,R.id.TextView06},
@@ -353,17 +360,13 @@ public  class Table extends Fragment implements OnClickListener, Connect.Inbox
 			/*2*/{R.id.TextView18,R.id.TextView08,R.id.TextView03,R.id.TextView14},//N
 			/*3*/{R.id.TextView10,R.id.TextView02,R.id.TextView21,R.id.TextView06},
 			/*4*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
-			/*5*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
-			/*6*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
-			/*7*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
-			/*8*/{R.id.TextView12,R.id.TextView24,R.id.TextView07,R.id.TextView15},
-			/*9*/{R.id.TextView02 ,R.id.TextView11 ,R.id.TextView04 ,R.id.TextView22 ,R.id.TextView15},//B
-			/*10*/{R.id.TextView16 ,R.id.TextView07 ,R.id.TextView17 ,R.id.TextView10 ,R.id.TextView19},//I
-			/*11*/{R.id.TextView13 ,R.id.TextView12 ,R.id.TextView01 ,R.id.TextView21 ,R.id.TextView09},//G
-			/*12*/{R.id.TextView06 ,R.id.TextView20 ,R.id.TextView05 ,R.id.TextView25 ,R.id.TextView24},//O
-			/*13*/{R.id.TextView24 ,R.id.TextView13 ,R.id.TextView14 ,R.id.TextView19 ,R.id.TextView02},//1
-			/*14*/{R.id.TextView11 ,R.id.TextView10 ,R.id.TextView03 ,R.id.TextView12 ,R.id.TextView25},//2
-			/*15*/{R.id.TextView20 ,R.id.TextView21 ,R.id.TextView18 ,R.id.TextView07 ,R.id.TextView22},//4
-			/*16*/{R.id.TextView15 ,R.id.TextView16 ,R.id.TextView08 ,R.id.TextView09 ,R.id.TextView06} //5
+			/*5*/{R.id.TextView02 ,R.id.TextView11 ,R.id.TextView04 ,R.id.TextView22 ,R.id.TextView15},//B
+			/*6*/{R.id.TextView16 ,R.id.TextView07 ,R.id.TextView17 ,R.id.TextView10 ,R.id.TextView19},//I
+			/*7*/{R.id.TextView13 ,R.id.TextView12 ,R.id.TextView01 ,R.id.TextView21 ,R.id.TextView09},//G
+			/*8*/{R.id.TextView06 ,R.id.TextView20 ,R.id.TextView05 ,R.id.TextView25 ,R.id.TextView24},//O
+			/*9*/{R.id.TextView24 ,R.id.TextView13 ,R.id.TextView14 ,R.id.TextView19 ,R.id.TextView02},//1
+			/*10*/{R.id.TextView11 ,R.id.TextView10 ,R.id.TextView03 ,R.id.TextView12 ,R.id.TextView25},//2
+			/*11*/{R.id.TextView20 ,R.id.TextView21 ,R.id.TextView18 ,R.id.TextView07 ,R.id.TextView22},//4
+			/*12*/{R.id.TextView15 ,R.id.TextView16 ,R.id.TextView08 ,R.id.TextView09 ,R.id.TextView06} //5
 		};
 }

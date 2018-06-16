@@ -123,9 +123,12 @@ public class List extends FragmentActivity implements View.OnClickListener,
 
                 base.clear();
                 for(int u=0;u<store_raw.length();u++) {
-                    JSONObject obj =
-                        new JSONObject(store_raw.getJSONObject(u).getString(Server.BINGO));
+
+                    JSONObject sub_obj=store_raw.getJSONObject(u),obj =
+                        new JSONObject(sub_obj.getString(Server.BINGO));
                     int n=obj.getJSONArray(Game.TABLES).length();
+                    if(sub_obj.getInt(Server._LOCAL)!=0)
+                        n=sub_obj.getString("tables_winners").split(",").length;
                     Adapter.Item tt = new Adapter.Item(obj.getString(Store.BINGO_NAME)
                             , obj.getString(Store.BINGO_COST), "Tablas registradas: "+n
                             , obj.getString(Store.BINGO_LOGO));
@@ -133,11 +136,19 @@ public class List extends FragmentActivity implements View.OnClickListener,
                     base.add(tt);
                 }
                 base.setDropDownViewResource(base.getCount() - 1);
-            }catch(JSONException e){}
+                Server.NOT_CONNECTION=false;
+            }catch(JSONException e)
+            {
+                base.clear();
+                base.add( new Adapter.Item("Sin conexión..."
+                            ,"...", "...", ""));
+                Server.NOT_CONNECTION=true;
+            }
         }
         @Override
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
         {
+           if(!Server.NOT_CONNECTION)
            if(arg2<store_raw.length()) {
                try {
                    Intent intent = new Intent(List.this, Bingo.class);

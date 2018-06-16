@@ -237,13 +237,14 @@ public class Game extends FragmentActivity
 					JSONObject store=new JSONObject(json);
 					JSONArray store_raw=store.getJSONArray(Game.TABLES);
 					title=store.getString(Store.BINGO_NAME);
+					if(title.equals("null"))
+						title="Ninguno.";
 					base.clear();
 					for(int u=1;u<store_raw.length();u++) {
 						JSONObject obj =store_raw.getJSONObject(u);
 
 						Adapter.Item tt = new Adapter.Item(obj.getString(User._NAME)
-								, u+ " Lugar!!!", "no se que poner aqui "
-								, "4.jpg");
+								, u+ " Lugar!!!", "", "");
 						base.add(tt);
 					}
 					base.setDropDownViewResource(base.getCount() - 1);
